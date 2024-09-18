@@ -2,13 +2,15 @@
 CREATE DATABASE code_data;
 USE code_data;
 
+DROP DATABASE code_data;
 
 -- C
 CREATE TABLE C
 (
-	NAME VARCHAR(50),
-	CODE TEXT,
-	COMMENT TEXT
+	zh_index VARCHAR(50),
+	en_index VARCHAR(50),
+	code_snippet TEXT,
+	zh_comment TEXT
 );
 
 -- 新建一系列表
@@ -41,5 +43,6 @@ CREATE TABLE STM32 LIKE C;
 -- C51
 CREATE TABLE C51 LIKE C;
 
+DELETE FROM C WHERE zh_index = "test";
 
-SELECT * FROM c;
+SELECT * FROM C;
