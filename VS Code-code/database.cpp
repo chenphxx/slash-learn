@@ -4,6 +4,10 @@
 using namespace std;
 
 
+char *update_query;  // 修改语句
+char *object;  // 修改对象
+
+
 int main(void)
 {
     MYSQL my_sql;
@@ -12,7 +16,7 @@ int main(void)
 
     mysql_init(&my_sql);
 
-    if (!mysql_real_connect(&my_sql, "localhost", "root", "147819", "data", 3306, NULL, 0))
+    if (!mysql_real_connect(&my_sql, "localhost", "root", "147819", "code_data", 3306, NULL, 0))
     {
         cout << "数据库连接失败: " << mysql_error(&my_sql) << endl;
         return 1;
@@ -22,7 +26,10 @@ int main(void)
         cout << "数据库连接成功" << endl;
     }
 
-    mysql_query(&my_sql, "insert into C values (\"int\", \"int val1 = 0;\", \"整型数据\");");
+    mysql_query(&my_sql, "delete from C where name = \"int\";");
+
+    mysql_query(&my_sql, "insert into C values (\"int\", \"int val1 = 17;\", \"整型数据\");");
+    mysql_query(&my_sql, "insert into C value(\"float\", \"float val1 = 41.71\", \"浮点型数据\");");
 
     // 执行 SQL 查询
     if (mysql_query(&my_sql, "SELECT * FROM C;"))
@@ -49,7 +56,7 @@ int main(void)
     {
         for (int i = 0; i < num_fields; i++)
         {
-            cout << (row[i] ? row[i] : "NULL") << "\t";  // 如果字段值为 NULL 则输出 "NULL"
+            cout << (row[i] ? row[i] : "NULL") << "\t";  // 如果为空 则输出 "NULL"
         }
         cout << endl;
     }

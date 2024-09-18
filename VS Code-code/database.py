@@ -2,10 +2,10 @@ import mysql.connector
 
 
 # 创建连接
-conn = mysql.connector.connect(username = "root", host = "localhost", password = "147819", database = "data")
+conn = mysql.connector.connect(username = "root", host = "localhost", password = "147819", database = "code_data")
 
 cursor = conn.cursor()
-cursor.execute("select * from person")
+cursor.execute("select * from C;")
 
 result = cursor.fetchall()
 # 根据结果的长度动态调整范围

@@ -1,6 +1,7 @@
 -- 新建数据库用于存储数据
-CREATE DATABASE DATA;
-USE DATA;
+CREATE DATABASE code_data;
+USE code_data;
+
 
 -- C
 CREATE TABLE C

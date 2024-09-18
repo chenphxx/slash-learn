@@ -73,4 +73,3 @@ void MainWindow::on_comment_copy_clicked()
     // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("内容已复制到剪贴板！", 1000);
 }
-
