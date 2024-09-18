@@ -6,7 +6,6 @@
 #include<QFile>
 #include <QClipboard>
 #include <QApplication>
-#include <QSqlDatabase>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -57,7 +56,7 @@ void MainWindow::on_code_copy_clicked()
     clipboard->setText(text);
 
     // 在状态栏显示消息 持续一秒
-    ui->statusbar->showMessage("内容已复制到剪贴板！", 1000);
+    ui->statusbar->showMessage("code已复制到剪贴板", 1000);
 }
 
 // 复制comment_edit内容
@@ -71,5 +70,40 @@ void MainWindow::on_comment_copy_clicked()
     clipboard->setText(text);
 
     // 在状态栏显示消息 持续一秒
-    ui->statusbar->showMessage("内容已复制到剪贴板！", 1000);
+    ui->statusbar->showMessage("comment已复制到剪贴板", 1000);
+}
+
+// code_save
+void MainWindow::on_code_save_clicked()
+{
+    // 在状态栏显示消息 持续一秒
+    ui->statusbar->showMessage("code已保存", 1000);
+}
+
+// comment_save
+void MainWindow::on_comment_save_clicked()
+{
+    // 在状态栏显示消息 持续一秒
+    ui->statusbar->showMessage("comment已保存", 1000);
+}
+
+// code_clear
+void MainWindow::on_code_clear_clicked()
+{
+    // 在状态栏显示消息 持续一秒
+    ui->statusbar->showMessage("code清屏", 1000);
+}
+
+// comment_clear
+void MainWindow::on_comment_clear_clicked()
+{
+    // 在状态栏显示消息 持续一秒
+    ui->statusbar->showMessage("comment清屏", 1000);
+}
+
+//  save_as
+void MainWindow::on_save_as_clicked()
+{
+    // 在状态栏显示消息 持续一秒
+    ui->statusbar->showMessage("另存为", 1000);
 }

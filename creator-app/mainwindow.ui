@@ -143,14 +143,40 @@
     <widget class="QPushButton" name="code_copy">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>400</x>
        <y>20</y>
-       <width>31</width>
+       <width>41</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>复制</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="code_save">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>保存</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="code_clear">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>80</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清屏</string>
      </property>
     </widget>
    </widget>
@@ -182,14 +208,53 @@
     <widget class="QPushButton" name="comment_copy">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>400</x>
        <y>20</y>
-       <width>31</width>
+       <width>41</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>复制</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="comment_save">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>50</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>保存</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="comment_clear">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>80</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清屏</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="save_as">
+     <property name="geometry">
+      <rect>
+       <x>399</x>
+       <y>110</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>另存为</string>
      </property>
     </widget>
    </widget>

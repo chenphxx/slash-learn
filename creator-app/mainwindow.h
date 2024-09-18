@@ -27,6 +27,16 @@ class MainWindow : public QMainWindow
 
         void on_comment_copy_clicked();
 
+        void on_code_save_clicked();
+
+        void on_code_clear_clicked();
+
+        void on_comment_save_clicked();
+
+        void on_comment_clear_clicked();
+
+        void on_save_as_clicked();
+
     private:
         Ui::MainWindow *ui;
 };

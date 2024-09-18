@@ -34,9 +34,14 @@ public:
     QFrame *code_frame;
     QTextEdit *code_edit;
     QPushButton *code_copy;
+    QPushButton *code_save;
+    QPushButton *code_clear;
     QFrame *comment_frame;
     QTextEdit *comment_edit;
     QPushButton *comment_copy;
+    QPushButton *comment_save;
+    QPushButton *comment_clear;
+    QPushButton *save_as;
     QPushButton *search_button;
     QLabel *label_logo;
     QMenuBar *menubar;
@@ -82,7 +87,13 @@ public:
         code_edit->setStyleSheet(QString::fromUtf8(""));
         code_copy = new QPushButton(code_frame);
         code_copy->setObjectName("code_copy");
-        code_copy->setGeometry(QRect(410, 20, 31, 23));
+        code_copy->setGeometry(QRect(400, 20, 41, 23));
+        code_save = new QPushButton(code_frame);
+        code_save->setObjectName("code_save");
+        code_save->setGeometry(QRect(400, 50, 41, 23));
+        code_clear = new QPushButton(code_frame);
+        code_clear->setObjectName("code_clear");
+        code_clear->setGeometry(QRect(400, 80, 41, 23));
         comment_frame = new QFrame(centralwidget);
         comment_frame->setObjectName("comment_frame");
         comment_frame->setGeometry(QRect(530, 160, 461, 411));
@@ -93,7 +104,16 @@ public:
         comment_edit->setGeometry(QRect(10, 10, 441, 391));
         comment_copy = new QPushButton(comment_frame);
         comment_copy->setObjectName("comment_copy");
-        comment_copy->setGeometry(QRect(410, 20, 31, 23));
+        comment_copy->setGeometry(QRect(400, 20, 41, 23));
+        comment_save = new QPushButton(comment_frame);
+        comment_save->setObjectName("comment_save");
+        comment_save->setGeometry(QRect(400, 50, 41, 23));
+        comment_clear = new QPushButton(comment_frame);
+        comment_clear->setObjectName("comment_clear");
+        comment_clear->setGeometry(QRect(400, 80, 41, 23));
+        save_as = new QPushButton(comment_frame);
+        save_as->setObjectName("save_as");
+        save_as->setGeometry(QRect(399, 110, 41, 23));
         search_button = new QPushButton(centralwidget);
         search_button->setObjectName("search_button");
         search_button->setGeometry(QRect(530, 100, 221, 41));
@@ -135,7 +155,12 @@ public:
 
         language_label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:700; color:#5e17eb;\">Language:</span></p></body></html>", nullptr));
         code_copy->setText(QCoreApplication::translate("MainWindow", "\345\244\215\345\210\266", nullptr));
+        code_save->setText(QCoreApplication::translate("MainWindow", "\344\277\235\345\255\230", nullptr));
+        code_clear->setText(QCoreApplication::translate("MainWindow", "\346\270\205\345\261\217", nullptr));
         comment_copy->setText(QCoreApplication::translate("MainWindow", "\345\244\215\345\210\266", nullptr));
+        comment_save->setText(QCoreApplication::translate("MainWindow", "\344\277\235\345\255\230", nullptr));
+        comment_clear->setText(QCoreApplication::translate("MainWindow", "\346\270\205\345\261\217", nullptr));
+        save_as->setText(QCoreApplication::translate("MainWindow", "\345\217\246\345\255\230\344\270\272", nullptr));
 #if QT_CONFIG(tooltip)
         search_button->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
