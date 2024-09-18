@@ -11,6 +11,7 @@
                 "-Llib",
                 "-lmysql",
                 "-Iinclude",
+                "database.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
