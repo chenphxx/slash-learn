@@ -1,6 +1,6 @@
 /**
  * @file database.h
- * @param 数据库接口文件
+ * @brief 数据库接口文件
  * 
  * @details 可能用到的一些数据库接口, 包括写入命令, 字符串转义等
  * 
