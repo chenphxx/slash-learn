@@ -47,12 +47,12 @@
     </property>
     <item>
      <property name="text">
-      <string>Rust</string>
+      <string>C</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>C</string>
+      <string>Rust</string>
      </property>
     </item>
     <item>

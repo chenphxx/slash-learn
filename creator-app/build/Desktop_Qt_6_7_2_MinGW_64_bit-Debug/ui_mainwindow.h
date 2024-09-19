@@ -143,8 +143,8 @@ public:
         search_box->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
         search_box->setText(QCoreApplication::translate("MainWindow", "\345\234\250\350\277\231\351\207\214\350\276\223\345\205\245\350\246\201\346\237\245\346\211\276\347\232\204\345\206\205\345\256\271", nullptr));
-        language_switch->setItemText(0, QCoreApplication::translate("MainWindow", "Rust", nullptr));
-        language_switch->setItemText(1, QCoreApplication::translate("MainWindow", "C", nullptr));
+        language_switch->setItemText(0, QCoreApplication::translate("MainWindow", "C", nullptr));
+        language_switch->setItemText(1, QCoreApplication::translate("MainWindow", "Rust", nullptr));
         language_switch->setItemText(2, QCoreApplication::translate("MainWindow", "C++", nullptr));
         language_switch->setItemText(3, QCoreApplication::translate("MainWindow", "Go", nullptr));
         language_switch->setItemText(4, QCoreApplication::translate("MainWindow", "Python", nullptr));

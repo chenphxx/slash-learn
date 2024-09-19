@@ -45,4 +45,7 @@ CREATE TABLE C51 LIKE C;
 
 DELETE FROM C WHERE zh_index = "test";
 
-SELECT * FROM C WHERE en_index = "int";
+SELECT * FROM CPP WHERE en_index = "int";
+
+INSERT INTO CPP VALUES ("整型", "int", "int val1 = 17;", "整型数据");
+
