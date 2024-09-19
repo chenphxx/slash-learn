@@ -37,6 +37,8 @@ class MainWindow : public QMainWindow
 
         void on_save_as_clicked();
 
+        void on_language_switch_currentIndexChanged(int index);
+
     private:
         Ui::MainWindow *ui;
 };

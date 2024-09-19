@@ -2,10 +2,18 @@
 #include "ui_mainwindow.h"
 
 #include <QTimer>
-#include<QFileDialog>
-#include<QFile>
+#include <QFileDialog>
+#include <QFile>
 #include <QClipboard>
 #include <QApplication>
+#include <QSqlDatabase>
+#include <QtSql>
+#include <QMessageBox>
+#include <QDebug>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QVariant>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -13,6 +21,22 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    qDebug() << QSqlDatabase::drivers();  // 控制台输出支持的数据库驱动
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");  // 创建数据库对象
+
+    // 数据库参数
+    db.setHostName("127.0.0.1");
+    db.setPort(3306);
+    db.setDatabaseName("code_data");
+    db.setUserName("root");
+    db.setPassword("147819");
+
+    bool ok = db.open();  // 打开数据库
+    if (ok)
+        ui->statusbar->showMessage("成功连接到数据库", 2000);
+    else
+        ui->statusbar->showMessage("数据库连接失败", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -20,28 +44,39 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QString language = "C";
 
-// 点击按钮连接到数据库
+// combobox 不同选择连接到不同的表
+void MainWindow::on_language_switch_currentIndexChanged(int index)
+{
+    language = ui->language_switch->currentText();  // 当前选择的选项
+    ui->statusbar->showMessage(language, 1000);
+    if (language == "C++")
+        language = "CPP";
+}
+
+// 搜索按钮
 void MainWindow::on_search_button_clicked()
 {
-    qDebug() << QSqlDatabase::drivers();
+    QSqlQuery query;  // 创建一个查询对象
 
-    QString path =QFileDialog::getOpenFileName(this,"open");
-    if(path.isEmpty() ==false)
+    QString index = ui->search_box->text();
+    QString command = "SELECT * FROM " + language + " WHERE en_index = '" + index + "'"  + " OR zh_index = '" + index + "';";
+    query.exec(command);  // 执行查询
+
+    // 获取字段索引
+    int code_snippet = query.record().indexOf("code_snippet");
+    int zh_comment = query.record().indexOf("zh_comment");
+
+    // 遍历结果集并输出
+    while (query.next())
     {
-        // 文件对象
-        QFile file(path);
+        QString code = query.value(code_snippet).toString();  // 获取code的值
+        QString comment = query.value(zh_comment).toString();  // 获取comment列的值
 
-        // 打开文件 只读方式 默认只识别utf8编码
-        bool bRet  =file.open(QIODevice::ReadOnly);
-        if(bRet == true)
-        {
-            // 读文件
-            QByteArray array = file.readAll();
-            // 显示到textEdit
-            ui->code_edit->setText(QString(array));
-        }
-        file.close();
+        qDebug() << "code:" << code << "\t" << "comment:" << comment;
+        ui->code_edit->append(code);
+        ui->comment_edit->append(comment);
     }
 }
 
@@ -55,55 +90,48 @@ void MainWindow::on_code_copy_clicked()
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(text);
 
-    // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("code已复制到剪贴板", 1000);
 }
 
 // 复制comment_edit内容
 void MainWindow::on_comment_copy_clicked()
 {
-    // 获取textEdit中的内容
     QString text = ui->comment_edit->toPlainText();
 
-    // 将内容复制到剪贴板
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(text);
 
-    // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("comment已复制到剪贴板", 1000);
 }
 
-// code_save
+// code_save 保存code
 void MainWindow::on_code_save_clicked()
 {
-    // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("code已保存", 1000);
 }
 
-// comment_save
+// comment_save 保存comment
 void MainWindow::on_comment_save_clicked()
 {
-    // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("comment已保存", 1000);
 }
 
-// code_clear
+// code_clear code清屏
 void MainWindow::on_code_clear_clicked()
 {
-    // 在状态栏显示消息 持续一秒
+    ui->code_edit->setText("");
     ui->statusbar->showMessage("code清屏", 1000);
 }
 
-// comment_clear
+// comment_clear comment清屏
 void MainWindow::on_comment_clear_clicked()
 {
-    // 在状态栏显示消息 持续一秒
+    ui->comment_edit->setText("");
     ui->statusbar->showMessage("comment清屏", 1000);
 }
 
 //  save_as
 void MainWindow::on_save_as_clicked()
 {
-    // 在状态栏显示消息 持续一秒
     ui->statusbar->showMessage("另存为", 1000);
 }

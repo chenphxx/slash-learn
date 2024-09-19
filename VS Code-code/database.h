@@ -37,7 +37,7 @@ char *get_infor(char *str);
  * 
  * @param query 目标语句
  * @param table 目标表格
- * @return 返回一条SQL写入语句
+ * @return 返回一条SQL写入命令语句
  */
 void insert_data(char *table, char *query);
 

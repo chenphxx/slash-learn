@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1023</width>
-    <height>629</height>
+    <width>1135</width>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QLineEdit" name="search_box">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>100</y>
-      <width>481</width>
+      <x>10</x>
+      <y>80</y>
+      <width>621</width>
       <height>41</height>
      </rect>
     </property>
@@ -33,11 +33,11 @@
      <string>在这里输入要查找的内容</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="language_choose">
+   <widget class="QComboBox" name="language_switch">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>100</y>
+      <x>1010</x>
+      <y>80</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -52,7 +52,12 @@
     </item>
     <item>
      <property name="text">
-      <string>C/C++</string>
+      <string>C</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C++</string>
      </property>
     </item>
     <item>
@@ -99,8 +104,8 @@
    <widget class="QLabel" name="language_label">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>100</y>
+      <x>890</x>
+      <y>80</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -115,10 +120,10 @@
    <widget class="QFrame" name="code_frame">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>160</y>
-      <width>461</width>
-      <height>411</height>
+      <x>10</x>
+      <y>140</y>
+      <width>551</width>
+      <height>471</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -132,8 +137,8 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>441</width>
-       <height>391</height>
+       <width>531</width>
+       <height>451</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -143,7 +148,7 @@
     <widget class="QPushButton" name="code_copy">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>490</x>
        <y>20</y>
        <width>41</width>
        <height>23</height>
@@ -156,7 +161,7 @@
     <widget class="QPushButton" name="code_save">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>490</x>
        <y>50</y>
        <width>41</width>
        <height>23</height>
@@ -169,7 +174,7 @@
     <widget class="QPushButton" name="code_clear">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>490</x>
        <y>80</y>
        <width>41</width>
        <height>23</height>
@@ -183,10 +188,10 @@
    <widget class="QFrame" name="comment_frame">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>160</y>
-      <width>461</width>
-      <height>411</height>
+      <x>580</x>
+      <y>140</y>
+      <width>541</width>
+      <height>471</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -200,15 +205,15 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>441</width>
-       <height>391</height>
+       <width>521</width>
+       <height>451</height>
       </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="comment_copy">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>480</x>
        <y>20</y>
        <width>41</width>
        <height>23</height>
@@ -221,7 +226,7 @@
     <widget class="QPushButton" name="comment_save">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>480</x>
        <y>50</y>
        <width>41</width>
        <height>23</height>
@@ -234,7 +239,7 @@
     <widget class="QPushButton" name="comment_clear">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>480</x>
        <y>80</y>
        <width>41</width>
        <height>23</height>
@@ -247,7 +252,7 @@
     <widget class="QPushButton" name="save_as">
      <property name="geometry">
       <rect>
-       <x>399</x>
+       <x>480</x>
        <y>110</y>
        <width>41</width>
        <height>23</height>
@@ -261,8 +266,8 @@
    <widget class="QPushButton" name="search_button">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>100</y>
+      <x>650</x>
+      <y>80</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -280,8 +285,8 @@
    <widget class="QLabel" name="label_logo">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>10</x>
+      <y>10</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -296,7 +301,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1023</width>
+     <width>1135</width>
      <height>20</height>
     </rect>
    </property>

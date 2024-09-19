@@ -45,4 +45,4 @@ CREATE TABLE C51 LIKE C;
 
 DELETE FROM C WHERE zh_index = "test";
 
-SELECT * FROM C;
+SELECT * FROM C WHERE en_index = "int";
