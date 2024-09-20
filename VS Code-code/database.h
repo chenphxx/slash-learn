@@ -22,7 +22,7 @@
  * @param input 目标字符串
  * @return 无
  */
-void escape_string(char* input);
+void escape_string(char *input);
 
 /**
  * @brief 获取要写入的参数

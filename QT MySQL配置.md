@@ -4,6 +4,8 @@
 
 首先下载QT源码, 选择`添加或移除组件` 
 
+![](D:\marktext-image\2024-09-19-17-33-51-image.png) 
+
 ![](D:\marktext-image\2024-09-19-15-05-54-image.png) 
 
 选择`Sources`, 等待下载完成 

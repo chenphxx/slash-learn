@@ -14,7 +14,7 @@ void escape_string(char *input)
     }
 
     // 分配新的字符串空间
-    char* escaped_string = (char*)malloc((new_length + 1) * sizeof(char));
+    char *escaped_string = (char*)malloc((new_length + 1) * sizeof(char));
     unsigned int new_index = 0;
 
     // 进行转义
@@ -38,7 +38,7 @@ void escape_string(char *input)
 
 char *get_infor(char *str)
 {
-    char temp[300];  // zh_index
+    char temp[300];
     fgets(temp, 300 * sizeof(char), stdin);
     temp[strcspn(temp, "\n")] = 0;  // 去掉fgets保留的\n
 

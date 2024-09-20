@@ -30,7 +30,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>在这里输入要查找的内容</string>
+     <string>int</string>
     </property>
    </widget>
    <widget class="QComboBox" name="language_switch">
@@ -309,5 +309,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>search_box</sender>
+   <signal>returnPressed()</signal>
+   <receiver>search_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>436</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>697</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
