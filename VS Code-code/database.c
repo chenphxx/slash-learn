@@ -13,6 +13,7 @@ void escape_string(char *input)
             new_length += 1;  // 其他字符保持不变
     }
 
+
     // 分配新的字符串空间
     char *escaped_string = (char*)malloc((new_length + 1) * sizeof(char));
     unsigned int new_index = 0;
