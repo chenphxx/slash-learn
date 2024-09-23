@@ -23,6 +23,12 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Cascadia Code</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="whatsThis">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
@@ -36,11 +42,17 @@
    <widget class="QComboBox" name="language_switch">
     <property name="geometry">
      <rect>
-      <x>1010</x>
+      <x>980</x>
       <y>80</y>
-      <width>101</width>
+      <width>131</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Cascadia Code</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
@@ -104,17 +116,24 @@
    <widget class="QLabel" name="language_label">
     <property name="geometry">
      <rect>
-      <x>890</x>
+      <x>860</x>
       <y>80</y>
       <width>111</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Cascadia Code</family>
+      <pointsize>20</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:700; color:#5e17eb;&quot;&gt;Language:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#5e17eb;&quot;&gt;Language:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QFrame" name="code_frame">
@@ -123,7 +142,7 @@
       <x>10</x>
       <y>140</y>
       <width>551</width>
-      <height>471</height>
+      <height>481</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -138,8 +157,14 @@
        <x>10</x>
        <y>10</y>
        <width>531</width>
-       <height>451</height>
+       <height>461</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
@@ -148,11 +173,16 @@
     <widget class="QPushButton" name="code_copy">
      <property name="geometry">
       <rect>
-       <x>490</x>
+       <x>480</x>
        <y>20</y>
-       <width>41</width>
-       <height>23</height>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>复制</string>
@@ -161,11 +191,16 @@
     <widget class="QPushButton" name="code_save">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>50</y>
-       <width>41</width>
-       <height>23</height>
+       <x>480</x>
+       <y>60</y>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>保存</string>
@@ -174,11 +209,16 @@
     <widget class="QPushButton" name="code_clear">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>80</y>
-       <width>41</width>
-       <height>23</height>
+       <x>480</x>
+       <y>100</y>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>清屏</string>
@@ -191,7 +231,7 @@
       <x>580</x>
       <y>140</y>
       <width>541</width>
-      <height>471</height>
+      <height>481</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -206,18 +246,36 @@
        <x>10</x>
        <y>10</y>
        <width>521</width>
-       <height>451</height>
+       <height>461</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
+     <property name="lineWidth">
+      <number>1</number>
      </property>
     </widget>
     <widget class="QPushButton" name="comment_copy">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>470</x>
        <y>20</y>
-       <width>41</width>
-       <height>23</height>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>复制</string>
@@ -226,11 +284,16 @@
     <widget class="QPushButton" name="comment_save">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>50</y>
-       <width>41</width>
-       <height>23</height>
+       <x>470</x>
+       <y>60</y>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>保存</string>
@@ -239,11 +302,16 @@
     <widget class="QPushButton" name="comment_clear">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>80</y>
-       <width>41</width>
-       <height>23</height>
+       <x>470</x>
+       <y>100</y>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>清屏</string>
@@ -252,11 +320,16 @@
     <widget class="QPushButton" name="save_as">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>110</y>
-       <width>41</width>
-       <height>23</height>
+       <x>470</x>
+       <y>140</y>
+       <width>51</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>另存为</string>
@@ -268,9 +341,14 @@
      <rect>
       <x>650</x>
       <y>80</y>
-      <width>221</width>
+      <width>191</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="toolTip">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -287,14 +365,27 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>211</width>
+      <width>261</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Cascadia Code</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700; font-style:italic; text-decoration: underline; color:#c1ff72;&quot;&gt;Code is Art.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700; font-style:italic; text-decoration: underline; color:#55aaff;&quot;&gt;Code is Art.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <zorder>search_box</zorder>
+   <zorder>language_switch</zorder>
+   <zorder>language_label</zorder>
+   <zorder>code_frame</zorder>
+   <zorder>search_button</zorder>
+   <zorder>label_logo</zorder>
+   <zorder>comment_frame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -1,17 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ui_new_data.h"
 
-#include <QTimer>
-#include <QClipboard>
-#include <QApplication>
-#include <QSqlDatabase>
-#include <QtSql>
-#include <QDebug>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QVariant>
-#include <QMessageBox>
+#include <QTimer>  // 定时
+#include <QClipboard>  // 复制到剪贴板
+#include <QtSql>  // 数据库
+#include <QDebug>  // 控制台输出
+#include <QMessageBox>  // 消息弹窗
+#include <QDialog>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -32,6 +28,11 @@ MainWindow::MainWindow(QWidget *parent)
         ui->statusbar->showMessage("成功连接到数据库", 2000);
     else
         ui->statusbar->showMessage("数据库连接失败", 2000);
+
+    QFont new_font("Cascadia Code", 12);  // 设置字体Cascadia Code 大小12
+    ui->code_edit->setFont(new_font);
+    ui->comment_edit->setFont(new_font);
+    ui->search_box->setFont(new_font);
 }
 
 MainWindow::~MainWindow()
@@ -39,9 +40,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
 int count_index = 0;  // 索引编号
+
 
 /**
  * @brief 对字符串中的"和\进行转义
@@ -225,7 +228,7 @@ void MainWindow::on_comment_save_clicked()
 
     if (result_count == 0)
     {
-        QMessageBox::information(this, "title", "没有任何查询结果, 无法保存");
+        QMessageBox::information(this, "title", "没有检测到内容, 无法保存");
     }
     else if (result_count == 1)
     {
@@ -242,7 +245,7 @@ void MainWindow::on_comment_save_clicked()
     }
     else
     {
-        QMessageBox::information(this, "title", "检测到有多条检测结果, 请选择要保存至哪一条结果");
+        QMessageBox::information(this, "title", "检测到有多条查询结果, 请选择要保存至哪一条结果");
     }
 }
 
@@ -278,5 +281,8 @@ void MainWindow::on_comment_clear_clicked()
  */
 void MainWindow::on_save_as_clicked()
 {
-    ui->statusbar->showMessage("另存为", 1000);
+    QDialog new_dialog(this);  // 创建一个QDialog实例
+    Ui::Dialog new_data_ui;
+    new_data_ui.setupUi(&new_dialog);  // 将 UI 设置到对话框中
+    new_dialog.exec();  // 以模态形式显示对话框
 }
