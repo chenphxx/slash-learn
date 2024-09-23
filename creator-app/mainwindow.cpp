@@ -11,7 +11,7 @@
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QVariant>
-#include <stdlib.h>
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -40,7 +40,8 @@ MainWindow::~MainWindow()
 }
 
 QString table = "C";  // 给定一个默认值
-bool table_change_flag = 0;  // 是否选择了新的语言
+unsigned int result_count = 0;  // 查询结果的数量
+int count_index = 0;  // 索引编号
 
 /**
  * @brief 对字符串中的"和\进行转义
@@ -69,13 +70,12 @@ void MainWindow::escape_string(QString& input)
  * @param index 选项
  * @return 无
  */
-void MainWindow::on_language_switch_currentIndexChanged(int index)
+void MainWindow::on_language_switch_currentTextChanged(const QString &)
 {
     table = ui->language_switch->currentText();  // 当前选择的选项
     ui->statusbar->showMessage(table, 1000);
     if (table == "C++")
         table = "CPP";
-    table_change_flag = 1;
 }
 
 /**
@@ -88,33 +88,58 @@ void MainWindow::on_search_button_clicked()
 {
     QSqlQuery query;  // 创建一个查询对象
     QString index = ui->search_box->text();  // 获取查询内容
+    if(index.isEmpty())
+    {
+        ui->code_edit->setText("没有输入任何关键词\n");
+        ui->comment_edit->setText("没有输入任何关键词\n");
+        result_count = 0;
+        return;  // 结束当前查询
+    }
 
     // 使用参数化查询, 防止SQL注入风险
     QString command = "SELECT * FROM " + table + " WHERE en_index = :index OR zh_index = :index";
     query.prepare(command);
     query.bindValue(":index", index);
-    query.exec();
+
+    // 清空之前的查询结果
+    ui->code_edit->clear();
+    ui->comment_edit->clear();
+
+    if(!query.exec())
+    {
+        // 查询失败时, 显示错误信息
+        QString error = "查询失败: " + query.lastError().text();
+        ui->code_edit->setText(error);
+        ui->comment_edit->setText(error);
+        return;
+    }
 
     // 获取字段索引
     int code_snippet = query.record().indexOf("code_snippet");
     int zh_comment = query.record().indexOf("zh_comment");
+    int count_index1 = query.record().indexOf("count_index");
 
-    // 如果选择了新的语言表, 就清空之前的查询结果
-    if (table_change_flag)
-    {
-        ui->code_edit->setText("");
-        ui->comment_edit->setText("");
-        table_change_flag = 0;
-    }
+    QTextCursor code_cursor(ui->code_edit->textCursor());
+    QTextCursor comment_cursor(ui->comment_edit->textCursor());
 
-    // 遍历结果集并输出
+    result_count = 0;  // 重置结果计数器
     while (query.next())
     {
-        QString code = query.value(code_snippet).toString();  // 获取code的值
-        QString comment = query.value(zh_comment).toString();  // 获取comment的值
+        result_count++;  // 结果计数+1
+        QString code = query.value(code_snippet).toString();  // 获取 code 的值
+        QString comment = query.value(zh_comment).toString();  // 获取 comment 的值
+        count_index = query.value(count_index1).toInt();  // 获取计数索引的值
 
-        ui->code_edit->setPlainText(code);
-        ui->comment_edit->setPlainText(comment);
+        // 使用 QTextCursor 插入内容
+        code_cursor.insertText(code);
+        code_cursor.insertText("\n----------------------------------------\n");  // 插入一条水平线 分隔多条结果
+        comment_cursor.insertText(comment);
+        comment_cursor.insertText("\n----------------------------------------\n");
+    }
+    if(result_count == 0)
+    {
+        code_cursor.insertText("没有查询到结果\n");
+        comment_cursor.insertText("没有查询到结果\n");
     }
 }
 
@@ -161,20 +186,30 @@ void MainWindow::on_comment_copy_clicked()
 void MainWindow::on_code_save_clicked()
 {
     QSqlQuery query;
-    QString index = ui->search_box->text();  // 获取查询内容
     QString code = ui->code_edit->toPlainText();  // 获取code_edit的内容
 
-    QString command = "UPDATE " + table + " SET code_snippet = :code WHERE zh_index = :index OR en_index = :index";
-    query.prepare(command);
-    query.bindValue(":code", code);
-    query.bindValue(":index", index);
+    if (result_count == 0)
+    {
+        QMessageBox::information(this, "title", "没有任何查询结果, 无法保存");
+    }
+    else if (result_count == 1)
+    {
+        QString command = "UPDATE " + table + " SET code_snippet = :code WHERE count_index = :index";
+        query.prepare(command);
+        query.bindValue(":code", code);
+        query.bindValue(":index", count_index);
 
-    // 执行更新语句
-    query.exec();
-    if (query.exec())
-        ui->statusbar->showMessage("代码已成功保存", 1000);
+        // 执行更新语句
+        query.exec();
+        if (query.exec())
+            ui->statusbar->showMessage("代码已成功保存", 1000);
+        else
+            ui->statusbar->showMessage("代码保存失败: " + query.lastError().text(), 3000);
+    }
     else
-        ui->statusbar->showMessage("代码保存失败: " + query.lastError().text(), 3000);
+    {
+        QMessageBox::information(this, "title", "检测到有多条查询结果, 请选择要保存至哪一条结果");
+    }
 }
 
 /**
@@ -186,19 +221,29 @@ void MainWindow::on_code_save_clicked()
 void MainWindow::on_comment_save_clicked()
 {
     QSqlQuery query;
-    QString index = ui->search_box->text();
     QString comment = ui->comment_edit->toPlainText();
 
-    QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE zh_index = :index OR en_index = :index";
-    query.prepare(command);
-    query.bindValue(":comment", comment);
-    query.bindValue(":index", index);
+    if (result_count == 0)
+    {
+        QMessageBox::information(this, "title", "没有任何查询结果, 无法保存");
+    }
+    else if (result_count == 1)
+    {
+        QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE count_index = :index";
+        query.prepare(command);
+        query.bindValue(":comment", comment);
+        query.bindValue(":index", count_index);
 
-    query.exec();
-    if (query.exec())
-        ui->statusbar->showMessage("注释已成功保存", 1000);
+        query.exec();
+        if (query.exec())
+            ui->statusbar->showMessage("注释已成功保存", 1000);
+        else
+            ui->statusbar->showMessage("注释保存失败: " + query.lastError().text(), 3000);
+    }
     else
-        ui->statusbar->showMessage("注释保存失败: " + query.lastError().text(), 3000);
+    {
+        QMessageBox::information(this, "title", "检测到有多条检测结果, 请选择要保存至哪一条结果");
+    }
 }
 
 /**
@@ -209,7 +254,7 @@ void MainWindow::on_comment_save_clicked()
  */
 void MainWindow::on_code_clear_clicked()
 {
-    ui->code_edit->setText("");
+    ui->code_edit->clear();
     ui->statusbar->showMessage("code清屏", 1000);
 }
 
@@ -221,7 +266,7 @@ void MainWindow::on_code_clear_clicked()
  */
 void MainWindow::on_comment_clear_clicked()
 {
-    ui->comment_edit->setText("");
+    ui->comment_edit->clear();
     ui->statusbar->showMessage("comment清屏", 1000);
 }
 

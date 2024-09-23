@@ -99,7 +99,7 @@ class MainWindow : public QMainWindow
          * @param index 选项
          * @return 无
          */
-        void on_language_switch_currentIndexChanged(int index);
+        void on_language_switch_currentTextChanged(const QString &arg1);
 
     private:
         Ui::MainWindow *ui;

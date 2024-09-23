@@ -7,10 +7,12 @@ DROP DATABASE code_data;
 -- C
 CREATE TABLE C
 (
+	count_index INT AUTO_INCREMENT, -- 自动递增列
 	zh_index VARCHAR(50),
 	en_index VARCHAR(50),
 	code_snippet TEXT,
-	zh_comment TEXT
+	zh_comment TEXT,
+	PRIMARY KEY (count_index)
 );
 
 -- 新建一系列表
@@ -43,9 +45,40 @@ CREATE TABLE STM32 LIKE C;
 -- C51
 CREATE TABLE C51 LIKE C;
 
-DELETE FROM C WHERE zh_index = "test";
+DELETE FROM C WHERE en_index = "int";
 
-SELECT * FROM CPP WHERE en_index = "int";
+SELECT * FROM C;
 
-INSERT INTO CPP VALUES ("整型", "int", "int val1 = 17;", "整型数据");
+INSERT INTO C (zh_index, en_index, code_snippet, zh_comment) VALUES ("整型", "int", "int val1 = 171;", "整型数据");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
