@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ui_new_data.h"
 
 #include <QTimer>  // 定时
 #include <QClipboard>  // 复制到剪贴板
@@ -8,6 +7,7 @@
 #include <QDebug>  // 控制台输出
 #include <QMessageBox>  // 消息弹窗
 #include <QDialog>
+#include "new_data_dialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -237,7 +237,6 @@ void MainWindow::on_comment_save_clicked()
         query.bindValue(":comment", comment);
         query.bindValue(":index", count_index);
 
-        query.exec();
         if (query.exec())
             ui->statusbar->showMessage("注释已成功保存", 1000);
         else
@@ -281,8 +280,6 @@ void MainWindow::on_comment_clear_clicked()
  */
 void MainWindow::on_save_as_clicked()
 {
-    QDialog new_dialog(this);  // 创建一个QDialog实例
-    Ui::Dialog new_data_ui;
-    new_data_ui.setupUi(&new_dialog);  // 将 UI 设置到对话框中
+    new_data_dialog new_dialog(table, this);  // 创建一个QDialog实例
     new_dialog.exec();  // 以模态形式显示对话框
 }
