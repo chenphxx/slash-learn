@@ -101,6 +101,14 @@ class MainWindow : public QMainWindow
          */
         void on_language_switch_currentTextChanged(const QString &arg1);
 
+        /**
+         * @brief 当有文本输入时, 应用markdown
+         *
+         * @param NULL
+         * @return 无
+         */
+        void on_comment_edit_textChanged();
+
     private:
         Ui::MainWindow *ui;
 };

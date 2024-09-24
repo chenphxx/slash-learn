@@ -1,7 +1,9 @@
 #ifndef NEW_DATA_DIALOG_H
 #define NEW_DATA_DIALOG_H
 
+
 #include <QDialog>
+
 
 namespace Ui {
 class new_data_dialog;
@@ -13,17 +15,30 @@ class new_data_dialog : public QDialog
 
 public:
     explicit new_data_dialog(QWidget *parent = nullptr);
-    explicit new_data_dialog(const QString &tableValue, QWidget *parent = nullptr);  // 新增构造函数
+    explicit new_data_dialog(const QString &tableValue, QWidget *parent = nullptr);  // 新增构造函数 用于接收table
     ~new_data_dialog();
 
 private slots:
+    /**
+     * @brief 保存数据
+     *
+     * @param NULL
+     * @return 无
+     */
     void on_new_data_save_clicked();
 
+    /**
+     * @brief 取消
+     *
+     * @param NULL
+     * @return 无
+     */
     void on_new_data_cancel_clicked();
 
 private:
     Ui::new_data_dialog *ui;
-    QString table_receive;  // 添加table1变量
+    QString table_receive;  // 添加table变量 从mainwindow接收
 };
+
 
 #endif  // NEW_DATA_DIALOG_H

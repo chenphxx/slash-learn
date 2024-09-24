@@ -156,6 +156,14 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>new_data_zh_index</tabstop>
+  <tabstop>new_data_en_index</tabstop>
+  <tabstop>new_data_code_edit</tabstop>
+  <tabstop>new_data_comment_edit</tabstop>
+  <tabstop>new_data_save</tabstop>
+  <tabstop>new_data_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -7,7 +7,9 @@
 #include <QDebug>  // 控制台输出
 #include <QMessageBox>  // 消息弹窗
 #include <QDialog>
+#include <QKeyEvent>
 #include "new_data_dialog.h"
+#include "code_highlighter.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    new code_highlighter(ui->code_edit->document());
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");  // 创建数据库对象
 
@@ -28,11 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->statusbar->showMessage("成功连接到数据库", 2000);
     else
         ui->statusbar->showMessage("数据库连接失败", 2000);
-
-    QFont new_font("Cascadia Code", 12);  // 设置字体Cascadia Code 大小12
-    ui->code_edit->setFont(new_font);
-    ui->comment_edit->setFont(new_font);
-    ui->search_box->setFont(new_font);
 }
 
 MainWindow::~MainWindow()
@@ -43,7 +41,7 @@ MainWindow::~MainWindow()
 
 QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
-int count_index = 0;  // 索引编号
+int number_index = 0;  // 索引编号
 
 
 /**
@@ -120,7 +118,7 @@ void MainWindow::on_search_button_clicked()
     // 获取字段索引
     int code_snippet = query.record().indexOf("code_snippet");
     int zh_comment = query.record().indexOf("zh_comment");
-    int count_index1 = query.record().indexOf("count_index");
+    int count_index1 = query.record().indexOf("number_index");
 
     QTextCursor code_cursor(ui->code_edit->textCursor());
     QTextCursor comment_cursor(ui->comment_edit->textCursor());
@@ -128,10 +126,10 @@ void MainWindow::on_search_button_clicked()
     result_count = 0;  // 重置结果计数器
     while (query.next())
     {
-        result_count++;  // 结果计数+1
+        result_count++;
         QString code = query.value(code_snippet).toString();  // 获取 code 的值
         QString comment = query.value(zh_comment).toString();  // 获取 comment 的值
-        count_index = query.value(count_index1).toInt();  // 获取计数索引的值
+        number_index = query.value(count_index1).toInt();  // 获取计数索引的值
 
         // 使用 QTextCursor 插入内容
         code_cursor.insertText(code);
@@ -197,10 +195,10 @@ void MainWindow::on_code_save_clicked()
     }
     else if (result_count == 1)
     {
-        QString command = "UPDATE " + table + " SET code_snippet = :code WHERE count_index = :index";
+        QString command = "UPDATE " + table + " SET code_snippet = :code WHERE number_index = :index";
         query.prepare(command);
         query.bindValue(":code", code);
-        query.bindValue(":index", count_index);
+        query.bindValue(":index", number_index);
 
         // 执行更新语句
         query.exec();
@@ -232,10 +230,10 @@ void MainWindow::on_comment_save_clicked()
     }
     else if (result_count == 1)
     {
-        QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE count_index = :index";
+        QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE number_index = :index";
         query.prepare(command);
         query.bindValue(":comment", comment);
-        query.bindValue(":index", count_index);
+        query.bindValue(":index", number_index);
 
         if (query.exec())
             ui->statusbar->showMessage("注释已成功保存", 1000);
@@ -282,4 +280,15 @@ void MainWindow::on_save_as_clicked()
 {
     new_data_dialog new_dialog(table, this);  // 创建一个QDialog实例
     new_dialog.exec();  // 以模态形式显示对话框
+}
+
+/**
+ * @brief 当内容发生更改时, 应用markdown
+ *
+ * @param NULL
+ * @return 无
+ */
+void MainWindow::on_comment_edit_textChanged()
+{
+
 }

@@ -64,12 +64,12 @@
     </item>
     <item>
      <property name="text">
-      <string>Rust</string>
+      <string>C++</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>C++</string>
+      <string>Rust</string>
      </property>
     </item>
     <item>
@@ -328,7 +328,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">

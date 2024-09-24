@@ -44,7 +44,7 @@ void new_data_dialog::on_new_data_save_clicked()
     query.bindValue(":zh_index", zh_index);
     query.bindValue(":en_index", en_index);
     query.bindValue(":code_snippet", code);
-    query.bindValue(":zh_commnet", comment);
+    query.bindValue(":zh_comment", comment);
 
     if (query.exec())
         QMessageBox::information(this, "title", "保存成功");
