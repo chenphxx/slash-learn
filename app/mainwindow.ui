@@ -169,6 +169,9 @@
      <property name="styleSheet">
       <string notr="true"/>
      </property>
+     <property name="tabStopDistance">
+      <double>40.000000000000000</double>
+     </property>
     </widget>
     <widget class="QPushButton" name="code_copy">
      <property name="geometry">
@@ -261,6 +264,9 @@
      </property>
      <property name="lineWidth">
       <number>1</number>
+     </property>
+     <property name="tabStopDistance">
+      <double>40.000000000000000</double>
      </property>
     </widget>
     <widget class="QPushButton" name="comment_copy">

@@ -7,12 +7,12 @@ DROP DATABASE code_data;
 -- C
 CREATE TABLE C
 (
-	count_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
+	number_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
 	zh_index VARCHAR(50),
 	en_index VARCHAR(50),
 	code_snippet TEXT,
 	zh_comment TEXT,
-	PRIMARY KEY (count_index)  -- 主键必须是 AUTO_INCREMENT 列
+	PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
 );
 
 -- 新建一系列表
@@ -33,4 +33,4 @@ CREATE TABLE C51 LIKE C;  -- C51
 
 SELECT * FROM C;
 
-INSERT INTO C VALUES ("整型", "int", "int val1 = 171;", "整型数据");
+INSERT INTO C (zh_index, en_index, code_snippet, zh_comment) VALUES ("整型", "int", "int val1 = 171;", "整型数据");

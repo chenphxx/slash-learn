@@ -7,10 +7,10 @@
 #include <QRegularExpression>
 
 
-// 声明 code_highlighter 类，继承自 QSyntaxHighlighter
+// 声明 code_highlighter 类, 继承自 QSyntaxHighlighter
 class code_highlighter : public QSyntaxHighlighter
 {
-    Q_OBJECT  // 宏，用于信号与槽机制
+    Q_OBJECT  // 宏, 用于信号与槽机制
 
 public:
     // 构造函数, 接受一个 QTextDocument 对象作为父对象
@@ -25,7 +25,7 @@ private:
     struct highlighting_rule
     {
         QRegularExpression pattern;  // 正则表达式匹配模式
-        QTextCharFormat format;      // 匹配后应用的文本格式
+        QTextCharFormat format;  // 匹配后应用的文本格式
     };
 
     // 高亮规则的列表

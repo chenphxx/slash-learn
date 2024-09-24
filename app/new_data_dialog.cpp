@@ -1,15 +1,20 @@
 #include "new_data_dialog.h"
 #include "ui_new_data_dialog.h"
+#include "code_highlighter.h"
 
 #include <QtSql>
 #include <QMessageBox>
 
 
-new_data_dialog::new_data_dialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::new_data_dialog)
+// 新增的带QString参数的构造函数
+new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
+    : QDialog(parent), ui(new Ui::new_data_dialog), table_receive(tableValue)
 {
     ui->setupUi(this);
+
+    new code_highlighter(ui->new_data_code_edit->document());  // 应用代码高亮
+
+    qDebug() << "传递过来的table值为: " << table_receive;
 }
 
 new_data_dialog::~new_data_dialog()
@@ -17,12 +22,17 @@ new_data_dialog::~new_data_dialog()
     delete ui;
 }
 
-// 新增的带QString参数的构造函数
-new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
-    : QDialog(parent), ui(new Ui::new_data_dialog), table_receive(tableValue)
+/**
+ * @brief 更新table_receive
+ *
+ * @param NULL
+ * @return 无
+ */
+void new_data_dialog::on_language_switch_currentTextChanged(const QString &)
 {
-    ui->setupUi(this);
-    qDebug() << "传递过来的table值为: " << table_receive;
+    table_receive = ui->language_switch->currentText();
+    if (table_receive == "C++")
+        table_receive = "CPP";
 }
 
 /**

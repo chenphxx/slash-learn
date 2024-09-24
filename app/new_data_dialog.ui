@@ -68,6 +68,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="tabStopDistance">
+    <double>40.000000000000000</double>
+   </property>
   </widget>
   <widget class="QTextEdit" name="new_data_comment_edit">
    <property name="geometry">
@@ -84,12 +87,15 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="tabStopDistance">
+    <double>40.000000000000000</double>
+   </property>
   </widget>
   <widget class="QLineEdit" name="new_data_zh_index">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>50</y>
+     <y>120</y>
      <width>191</width>
      <height>61</height>
     </rect>
@@ -105,7 +111,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>170</y>
+     <y>240</y>
      <width>191</width>
      <height>61</height>
     </rect>
@@ -121,7 +127,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
+     <y>90</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -140,7 +146,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>140</y>
+     <y>210</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -153,6 +159,96 @@
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;en_index&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="language_switch">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>40</y>
+     <width>191</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Cascadia Code</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <item>
+    <property name="text">
+     <string>C</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>C++</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Rust</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Go</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Python</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Lisp</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Assembly</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Java</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>JavaScript</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>CSS</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Cascadia Code</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;language&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

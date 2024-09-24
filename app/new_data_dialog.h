@@ -14,7 +14,6 @@ class new_data_dialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit new_data_dialog(QWidget *parent = nullptr);
     explicit new_data_dialog(const QString &tableValue, QWidget *parent = nullptr);  // 新增构造函数 用于接收table
     ~new_data_dialog();
 
@@ -34,6 +33,14 @@ private slots:
      * @return 无
      */
     void on_new_data_cancel_clicked();
+
+    /**
+     * @brief 更改table_receive的值
+     *
+     * @param NULL
+     * @return 无
+     */
+    void on_language_switch_currentTextChanged(const QString &);
 
 private:
     Ui::new_data_dialog *ui;

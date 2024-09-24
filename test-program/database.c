@@ -69,7 +69,7 @@ void insert_data(char *table, char *query)
     fgets(zh_comment, 300 * sizeof(char), stdin);
     zh_comment[strcspn(zh_comment, "\n")] = 0;
 
-    sprintf(query, "INSERT INTO %s VALUES (\"%s\", \"%s\", \"%s\", \"%s\");", table, zh_index, en_index, code_snippet, zh_comment);
+    sprintf(query, "INSERT INTO %s (zh_index, en_index, code_snippet, zh_comment) VALUES (\"%s\", \"%s\", \"%s\", \"%s\");", table, zh_index, en_index, code_snippet, zh_comment);
 
     free(zh_index);
     free(en_index);

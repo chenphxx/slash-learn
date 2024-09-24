@@ -20,14 +20,6 @@ class MainWindow : public QMainWindow
         MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
-        /**
-         * @brief 对字符串中的"和\进行转义
-         *
-         * @param input 目标字符串
-         * @return 无
-         */
-        void escape_string(QString &input);
-
     private slots:
         /**
          * @brief 搜索
@@ -100,14 +92,6 @@ class MainWindow : public QMainWindow
          * @return 无
          */
         void on_language_switch_currentTextChanged(const QString &arg1);
-
-        /**
-         * @brief 当有文本输入时, 应用markdown
-         *
-         * @param NULL
-         * @return 无
-         */
-        void on_comment_edit_textChanged();
 
     private:
         Ui::MainWindow *ui;

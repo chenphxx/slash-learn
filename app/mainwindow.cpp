@@ -1,15 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "new_data_dialog.h"
+#include "code_highlighter.h"
 
 #include <QTimer>  // 定时
 #include <QClipboard>  // 复制到剪贴板
 #include <QtSql>  // 数据库
 #include <QDebug>  // 控制台输出
 #include <QMessageBox>  // 消息弹窗
-#include <QDialog>
-#include <QKeyEvent>
-#include "new_data_dialog.h"
-#include "code_highlighter.h"
+#include <QDialog>  // dialog
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    new code_highlighter(ui->code_edit->document());
+
+    new code_highlighter(ui->code_edit->document());  // 应用代码高亮
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");  // 创建数据库对象
 
@@ -43,27 +43,6 @@ QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
 int number_index = 0;  // 索引编号
 
-
-/**
- * @brief 对字符串中的"和\进行转义
- *
- * @param input
- * @return 无
- */
-void MainWindow::escape_string(QString& input)
-{
-    QString escaped_string;
-
-    for (QChar ch : input) {
-        if (ch == '\"' || ch == '\\')
-        {
-            escaped_string.append('\\');  // 添加转义字符
-        }
-        escaped_string.append(ch);  // 添加原字符
-    }
-
-    input = escaped_string;  // 将转义后的字符串赋回原输入
-}
 
 /**
  * @brief 切换数据库中的表
@@ -99,6 +78,9 @@ void MainWindow::on_search_button_clicked()
 
     // 使用参数化查询, 防止SQL注入风险
     QString command = "SELECT * FROM " + table + " WHERE en_index = :index OR zh_index = :index";
+    if (index == "000")  // 000表示查询所有数据
+        command = "SELECT * FROM " + table;
+
     query.prepare(command);
     query.bindValue(":index", index);
 
@@ -133,9 +115,10 @@ void MainWindow::on_search_button_clicked()
 
         // 使用 QTextCursor 插入内容
         code_cursor.insertText(code);
-        code_cursor.insertText("\n----------------------------------------\n");  // 插入一条水平线 分隔多条结果
+        code_cursor.insertText("\n---\n");  // 插入一条水平线 分隔多条结果
+
         comment_cursor.insertText(comment);
-        comment_cursor.insertText("\n----------------------------------------\n");
+        comment_cursor.insertText("\n---\n");
     }
     if(result_count == 0)
     {
@@ -280,15 +263,4 @@ void MainWindow::on_save_as_clicked()
 {
     new_data_dialog new_dialog(table, this);  // 创建一个QDialog实例
     new_dialog.exec();  // 以模态形式显示对话框
-}
-
-/**
- * @brief 当内容发生更改时, 应用markdown
- *
- * @param NULL
- * @return 无
- */
-void MainWindow::on_comment_edit_textChanged()
-{
-
 }
