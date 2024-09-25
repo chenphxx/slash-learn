@@ -141,7 +141,7 @@
      <rect>
       <x>10</x>
       <y>140</y>
-      <width>551</width>
+      <width>511</width>
       <height>481</height>
      </rect>
     </property>
@@ -154,10 +154,10 @@
     <widget class="QTextEdit" name="code_edit">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>531</width>
-       <height>461</height>
+       <x>0</x>
+       <y>0</y>
+       <width>511</width>
+       <height>481</height>
       </rect>
      </property>
      <property name="font">
@@ -176,8 +176,8 @@
     <widget class="QPushButton" name="code_copy">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>20</y>
+       <x>450</x>
+       <y>10</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -194,8 +194,8 @@
     <widget class="QPushButton" name="code_save">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>60</y>
+       <x>450</x>
+       <y>50</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -212,8 +212,8 @@
     <widget class="QPushButton" name="code_clear">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>100</y>
+       <x>450</x>
+       <y>90</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -231,9 +231,9 @@
    <widget class="QFrame" name="comment_frame">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>530</x>
       <y>140</y>
-      <width>541</width>
+      <width>501</width>
       <height>481</height>
      </rect>
     </property>
@@ -246,10 +246,10 @@
     <widget class="QTextEdit" name="comment_edit">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>521</width>
-       <height>461</height>
+       <x>0</x>
+       <y>0</y>
+       <width>501</width>
+       <height>481</height>
       </rect>
      </property>
      <property name="font">
@@ -272,8 +272,8 @@
     <widget class="QPushButton" name="comment_copy">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>20</y>
+       <x>440</x>
+       <y>10</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -290,8 +290,8 @@
     <widget class="QPushButton" name="comment_save">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>60</y>
+       <x>440</x>
+       <y>50</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -308,8 +308,8 @@
     <widget class="QPushButton" name="comment_clear">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>100</y>
+       <x>440</x>
+       <y>90</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -326,8 +326,8 @@
     <widget class="QPushButton" name="save_as">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>140</y>
+       <x>440</x>
+       <y>130</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -385,6 +385,16 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700; font-style:italic; text-decoration: underline; color:#55aaff;&quot;&gt;Code is Art.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QTextBrowser" name="number_index_browser">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>140</y>
+      <width>81</width>
+      <height>481</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>search_box</zorder>
    <zorder>language_switch</zorder>
    <zorder>language_label</zorder>
@@ -392,6 +402,7 @@
    <zorder>search_button</zorder>
    <zorder>label_logo</zorder>
    <zorder>comment_frame</zorder>
+   <zorder>number_index_browser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

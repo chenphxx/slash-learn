@@ -43,12 +43,13 @@ void new_data_dialog::on_language_switch_currentTextChanged(const QString &)
  */
 void new_data_dialog::on_new_data_save_clicked()
 {
+    QSqlQuery query;
+
     QString zh_index = ui->new_data_zh_index->text();
     QString en_index = ui->new_data_en_index->text();
     QString code = ui->new_data_code_edit->toPlainText();
     QString comment = ui->new_data_comment_edit->toPlainText();
 
-    QSqlQuery query;
     QString command = "INSERT INTO " + table_receive + " (zh_index, en_index, code_snippet, zh_comment) VALUES (:zh_index, :en_index, :code_snippet, :zh_comment)";
     query.prepare(command);
     query.bindValue(":zh_index", zh_index);
@@ -60,6 +61,46 @@ void new_data_dialog::on_new_data_save_clicked()
         QMessageBox::information(this, "title", "保存成功");
     else
         QMessageBox::information(this, "title", "保存失败");
+}
+
+/**
+ * @brief 删除数据
+ *
+ * @param NULL
+ * @return 无
+ */
+void new_data_dialog::on_new_data_delete_clicked()
+{
+    QSqlQuery query;
+
+    QString index_type = "number_index";
+    QString index = ui->new_data_number_index->text();
+
+    QString command = "DELETE FROM " + table_receive + " WHERE " + index_type + " = :index";
+    // 判断用户输入的 index 是什么类型
+    if(index.isEmpty())
+    {
+        index = ui->new_data_zh_index->text();
+        index_type = "zh_index";
+        if(index.isEmpty())
+        {
+            index = ui->new_data_en_index->text();
+            index_type = "en_index";
+        }
+    }
+    query.prepare(command);
+
+    // 根据不同索引进行不同的索引类型转换
+    if(index_type == "number_index")
+        query.bindValue(":index", index.toInt());
+    else
+        query.bindValue(":index", index);
+
+    // 执行查询并反馈结果
+    if(query.exec())
+        QMessageBox::information(this, "title", "删除成功");
+    else
+        QMessageBox::information(this, "title", "删除失败, 请重试");
 }
 
 /**

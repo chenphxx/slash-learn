@@ -42,6 +42,14 @@ private slots:
      */
     void on_language_switch_currentTextChanged(const QString &);
 
+    /**
+     * @brief 删除数据
+     *
+     * @param NULL
+     * @return 无
+     */
+    void on_new_data_delete_clicked();
+
 private:
     Ui::new_data_dialog *ui;
     QString table_receive;  // 添加table变量 从mainwindow接收

@@ -87,6 +87,7 @@ void MainWindow::on_search_button_clicked()
     // 清空之前的查询结果
     ui->code_edit->clear();
     ui->comment_edit->clear();
+    ui->number_index_browser->clear();
 
     if(!query.exec())
     {
@@ -104,6 +105,7 @@ void MainWindow::on_search_button_clicked()
 
     QTextCursor code_cursor(ui->code_edit->textCursor());
     QTextCursor comment_cursor(ui->comment_edit->textCursor());
+    QTextCursor number_index_cursor(ui->number_index_browser->textCursor());
 
     result_count = 0;  // 重置结果计数器
     while (query.next())
@@ -119,6 +121,9 @@ void MainWindow::on_search_button_clicked()
 
         comment_cursor.insertText(comment);
         comment_cursor.insertText("\n---\n");
+
+        number_index_cursor.insertText(QString::number(number_index));
+        number_index_cursor.insertText("\n---\n");
     }
     if(result_count == 0)
     {
