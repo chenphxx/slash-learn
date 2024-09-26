@@ -23,9 +23,9 @@ FORMS += \
     mainwindow.ui \
     new_data_dialog.ui
 
+RC_ICONS = sources/code_database.ico  # 添加logo
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES +=

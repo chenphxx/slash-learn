@@ -29,8 +29,19 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);
+</string>
+   </property>
    <property name="text">
-    <string>保存</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
    </property>
   </widget>
   <widget class="QPushButton" name="new_data_cancel">
@@ -49,8 +60,18 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);</string>
+   </property>
    <property name="text">
-    <string>取消</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::WindowClose"/>
    </property>
   </widget>
   <widget class="QTextEdit" name="new_data_code_edit">
@@ -67,6 +88,9 @@
      <family>Cascadia Code</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="cursor" stdset="0">
+    <cursorShape>IBeamCursor</cursorShape>
    </property>
    <property name="tabStopDistance">
     <double>40.000000000000000</double>
@@ -87,6 +111,12 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="cursor" stdset="0">
+    <cursorShape>IBeamCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="tabStopDistance">
     <double>40.000000000000000</double>
    </property>
@@ -106,6 +136,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;</string>
+   </property>
   </widget>
   <widget class="QLineEdit" name="new_data_en_index">
    <property name="geometry">
@@ -122,6 +155,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;</string>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -137,6 +173,9 @@
      <family>Cascadia Code</family>
      <pointsize>14</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(31, 171, 137);</string>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;zh_index&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -157,6 +196,9 @@
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(31, 171, 137);</string>
+   </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;en_index&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
@@ -176,59 +218,98 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(31, 171, 137);</string>
+   </property>
    <item>
     <property name="text">
      <string>C</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
    <item>
     <property name="text">
      <string>C++</string>
     </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
    </item>
    <item>
     <property name="text">
      <string>Rust</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
    <item>
     <property name="text">
      <string>Go</string>
     </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
    </item>
    <item>
     <property name="text">
      <string>Python</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
    <item>
     <property name="text">
      <string>Lisp</string>
     </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
    </item>
    <item>
     <property name="text">
      <string>Assembly</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
    <item>
     <property name="text">
      <string>Java</string>
     </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
    </item>
    <item>
     <property name="text">
      <string>JavaScript</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
    <item>
     <property name="text">
      <string>HTML</string>
     </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
    </item>
    <item>
     <property name="text">
      <string>CSS</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
   </widget>
@@ -246,6 +327,9 @@
      <family>Cascadia Code</family>
      <pointsize>14</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(31, 171, 137);</string>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;language&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -267,8 +351,18 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);</string>
+   </property>
    <property name="text">
-    <string>删除</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditDelete"/>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -285,6 +379,9 @@
      <family>Cascadia Code</family>
      <pointsize>14</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(31, 171, 137);</string>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;number_index&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -304,6 +401,9 @@
      <family>Cascadia Code</family>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;</string>
    </property>
   </widget>
  </widget>

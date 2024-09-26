@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>621</width>
+      <width>611</width>
       <height>41</height>
      </rect>
     </property>
@@ -33,18 +33,18 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>int</string>
+     <string>000</string>
     </property>
    </widget>
    <widget class="QComboBox" name="language_switch">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>970</x>
       <y>80</y>
-      <width>131</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
@@ -54,69 +54,105 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: rgb(31, 171, 137);</string>
     </property>
     <item>
      <property name="text">
       <string>C</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
     <item>
      <property name="text">
       <string>C++</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>Rust</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
     <item>
      <property name="text">
       <string>Go</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>Python</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
     <item>
      <property name="text">
       <string>Lisp</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>Assembly</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
     <item>
      <property name="text">
       <string>Java</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>JavaScript</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
     <item>
      <property name="text">
       <string>HTML</string>
      </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>CSS</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
      </property>
     </item>
    </widget>
    <widget class="QLabel" name="language_label">
     <property name="geometry">
      <rect>
-      <x>860</x>
+      <x>850</x>
       <y>80</y>
       <width>111</width>
       <height>41</height>
@@ -145,6 +181,9 @@
       <height>481</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
     </property>
@@ -166,8 +205,8 @@
        <pointsize>12</pointsize>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
+     <property name="cursor" stdset="0">
+      <cursorShape>IBeamCursor</cursorShape>
      </property>
      <property name="tabStopDistance">
       <double>40.000000000000000</double>
@@ -187,8 +226,18 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);
+color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>复制</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditCopy"/>
      </property>
     </widget>
     <widget class="QPushButton" name="code_save">
@@ -205,8 +254,17 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>保存</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
      </property>
     </widget>
     <widget class="QPushButton" name="code_clear">
@@ -223,8 +281,17 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>清屏</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditClear"/>
      </property>
     </widget>
    </widget>
@@ -236,6 +303,9 @@
       <width>501</width>
       <height>481</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -260,7 +330,7 @@
       </font>
      </property>
      <property name="cursor" stdset="0">
-      <cursorShape>ArrowCursor</cursorShape>
+      <cursorShape>IBeamCursor</cursorShape>
      </property>
      <property name="lineWidth">
       <number>1</number>
@@ -283,8 +353,17 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>复制</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditCopy"/>
      </property>
     </widget>
     <widget class="QPushButton" name="comment_save">
@@ -301,8 +380,17 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>保存</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
      </property>
     </widget>
     <widget class="QPushButton" name="comment_clear">
@@ -319,8 +407,17 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>清屏</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::EditClear"/>
      </property>
     </widget>
     <widget class="QPushButton" name="save_as">
@@ -337,15 +434,24 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(185, 187, 223);</string>
+     </property>
      <property name="text">
-      <string>另存为</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
      </property>
     </widget>
    </widget>
    <widget class="QPushButton" name="search_button">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>640</x>
       <y>80</y>
       <width>191</width>
       <height>41</height>
@@ -353,17 +459,25 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;搜索&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);
+</string>
     </property>
     <property name="text">
-     <string>搜索</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
     </property>
    </widget>
    <widget class="QLabel" name="label_logo">
@@ -381,8 +495,11 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700; font-style:italic; text-decoration: underline; color:#55aaff;&quot;&gt;Code is Art.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700; font-style:italic; text-decoration: underline; color:#1fab89;&quot;&gt;Code is Art.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="number_index_browser">
@@ -399,10 +516,10 @@
    <zorder>language_switch</zorder>
    <zorder>language_label</zorder>
    <zorder>code_frame</zorder>
-   <zorder>search_button</zorder>
    <zorder>label_logo</zorder>
    <zorder>comment_frame</zorder>
    <zorder>number_index_browser</zorder>
+   <zorder>search_button</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

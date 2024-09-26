@@ -46,9 +46,29 @@ void new_data_dialog::on_new_data_save_clicked()
     QSqlQuery query;
 
     QString zh_index = ui->new_data_zh_index->text();
+    if (zh_index.isEmpty())
+    {
+        QMessageBox::information(this, "title", "zh_index为空, 请输入");
+        return ;
+    }
     QString en_index = ui->new_data_en_index->text();
+    if (en_index.isEmpty())
+    {
+        QMessageBox::information(this, "title", "en_index为空, 请输入");
+        return ;
+    }
     QString code = ui->new_data_code_edit->toPlainText();
+    if (code.isEmpty())
+    {
+        QMessageBox::information(this, "title", "code为空, 请输入");
+        return ;
+    }
     QString comment = ui->new_data_comment_edit->toPlainText();
+    if (comment.isEmpty())
+    {
+        QMessageBox::information(this, "title", "comment为空, 请输入");
+        return ;
+    }
 
     QString command = "INSERT INTO " + table_receive + " (zh_index, en_index, code_snippet, zh_comment) VALUES (:zh_index, :en_index, :code_snippet, :zh_comment)";
     query.prepare(command);
@@ -89,14 +109,11 @@ void new_data_dialog::on_new_data_delete_clicked()
         }
     }
     query.prepare(command);
-
-    // 根据不同索引进行不同的索引类型转换
     if(index_type == "number_index")
         query.bindValue(":index", index.toInt());
     else
         query.bindValue(":index", index);
 
-    // 执行查询并反馈结果
     if(query.exec())
         QMessageBox::information(this, "title", "删除成功");
     else
