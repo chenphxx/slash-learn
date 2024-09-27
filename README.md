@@ -2,6 +2,20 @@
 
 本项目是一款基于QT和MySQL开发的数据库查询软件, 包含了作者在开发和日常学习当中可能会用到的各种技术栈知识点 
 在搜索框中输入, 查询结果会在下方的控件当中显示 
+正常运行本程序, 需要本机安装有`MySQL`, 并且新建数据库`code_database`, 在数据库中新建查询表, 查询表需要具有以下结构: 
+```sql
+CREATE TABLE C
+(
+    number_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
+    zh_index VARCHAR(50),
+    en_index VARCHAR(50),
+    code_snippet TEXT,
+    zh_comment TEXT,
+    PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
+);
+```
+除此之外, 还需要在`QT`的编译器目录下添加编译好的MySQL驱动
+准备工作做完之后, 应该就能正常运行程序了, 程序尚未打包为独立的`.exe`文件, 需要用户自己手动编译打包 
 
 ## 联系作者
 
