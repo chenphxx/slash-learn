@@ -312,6 +312,62 @@ background-color: rgb(185, 187, 223);</string>
      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Embed</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>STM32</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>C51</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GIT</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>QT</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>MySQL</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SQLite</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">

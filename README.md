@@ -12,6 +12,14 @@ E-Main: john201950@outlook.com
 VX: XieG0110
 ```
 
+## V2024.9.27
+
+1. 将程序使用的数据库从`MySQL`更改到了`SQLite` 
+
+2. 新的数据库将存储在目录`sources`下的`database`文件夹中 
+
+3. 添加了表`Embed` `QT` `SQLite` 
+
 ## V2024.9.26
 
 1. 为软件中的按键添加了圆角设计, 更改了部分控件以及文字的配色 

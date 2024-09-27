@@ -3,6 +3,12 @@
 
 
 #include <QMainWindow>
+#include <QTimer>  // 定时
+#include <QClipboard>  // 复制到剪贴板
+#include <QtSql>  // 数据库
+#include <QDebug>  // 控制台输出
+#include <QMessageBox>  // 消息弹窗
+#include <QDialog>  // dialog
 
 
 QT_BEGIN_NAMESPACE

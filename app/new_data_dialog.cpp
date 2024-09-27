@@ -14,6 +14,7 @@ new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
 
     new code_highlighter(ui->new_data_code_edit->document());  // 应用代码高亮
 
+    ui->language_switch->setCurrentText(table_receive);  // 设置默认选项
     qDebug() << "传递过来的table值为: " << table_receive;
 }
 
@@ -106,6 +107,11 @@ void new_data_dialog::on_new_data_delete_clicked()
         {
             index = ui->new_data_en_index->text();
             index_type = "en_index";
+            if (index.isEmpty())
+            {
+                QMessageBox::information(this, "title", "请输入要删除的数据信息");
+                return ;
+            }
         }
     }
     query.prepare(command);

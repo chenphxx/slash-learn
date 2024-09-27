@@ -3,13 +3,6 @@
 #include "new_data_dialog.h"
 #include "code_highlighter.h"
 
-#include <QTimer>  // 定时
-#include <QClipboard>  // 复制到剪贴板
-#include <QtSql>  // 数据库
-#include <QDebug>  // 控制台输出
-#include <QMessageBox>  // 消息弹窗
-#include <QDialog>  // dialog
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,18 +12,70 @@ MainWindow::MainWindow(QWidget *parent)
 
     new code_highlighter(ui->code_edit->document());  // 应用代码高亮
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");  // 创建数据库对象
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
+    // 创建数据库连接
+    db.setDatabaseName("../../sources/database/code_database.db");  // 数据库路径
+    if (!db.open())
+    {
+        QString errorMsg = "数据库连接失败: " + db.lastError().text();
+        ui->statusbar->showMessage(errorMsg, 2000);
+        qDebug() << errorMsg;
+        return ;
+    }
 
-    // 数据库参数
-    db.setHostName("127.0.0.1");
-    db.setPort(3306);
-    db.setDatabaseName("code_data");
-    db.setUserName("root");
-    db.setPassword("147819");
-    if (db.open())
-        ui->statusbar->showMessage("成功连接到数据库", 2000);
-    else
-        ui->statusbar->showMessage("数据库连接失败", 2000);
+    // 创建表 C 的 SQL 语句
+    QString createCQuery =
+        "CREATE TABLE IF NOT EXISTS C"
+        "("
+            "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
+            "zh_index VARCHAR(50), "  // 中文索引
+            "en_index VARCHAR(50), "  // 英文索引
+            "code_snippet TEXT, "  // 代码段
+            "zh_comment TEXT"  // 中文注释
+        ")";
+    QSqlQuery query;
+
+    // 执行创建 C 表的 SQL
+    if (!query.exec(createCQuery))
+    {
+        QString errorMsg = "创建表 C 失败: " + query.lastError().text();
+        QMessageBox::critical(this, "Error", errorMsg);
+        qDebug() << errorMsg;
+        return ;
+    }
+
+    // 其他表
+    QStringList languages =
+    {
+        "CPP", "Rust", "Python", "MySQL", "Git", "Go",
+        "Lisp", "Assembly", "Java", "JavaScript", "HTML",
+        "CSS", "Embed", "STM32", "C51", "QT", "SQLite"
+    };
+
+    // 循环创建每个表
+    for (const QString &lang : languages)
+    {
+        QString createTableQuery = QString
+                                   (
+                                       "CREATE TABLE IF NOT EXISTS %1"
+                                       "("
+                                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                           "zh_index VARCHAR(50), "
+                                           "en_index VARCHAR(50), "
+                                           "code_snippet TEXT, "
+                                           "zh_comment TEXT"
+                                       ")"
+                                    ).arg(lang);
+
+        // 执行创建表的 SQL 语句
+        if (!query.exec(createTableQuery))
+        {
+            QString errorMsg = QString("创建表 %1 失败: %2").arg(lang, query.lastError().text());
+            QMessageBox::critical(this, "Error", errorMsg);
+            qDebug() << errorMsg;
+        }
+    }
+    ui->statusbar->showMessage("所有表创建成功", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -266,6 +311,8 @@ void MainWindow::on_comment_clear_clicked()
  */
 void MainWindow::on_save_as_clicked()
 {
-    new_data_dialog new_dialog(table, this);  // 创建一个QDialog实例
-    new_dialog.exec();  // 以模态形式显示对话框
+    new_data_dialog *new_dialog = new new_data_dialog(table, this);  // 在堆上创建一个QDialog实例
+    new_dialog->setModal(false);  // 设置为非模态
+    new_dialog->setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除对象
+    new_dialog->show();  // 非模态形式 保持主窗口可访问
 }

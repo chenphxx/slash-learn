@@ -9,7 +9,8 @@ code_highlighter::code_highlighter(QTextDocument *parent)
     QStringList keyword_patterns;
     keyword_patterns << "\\bclass\\b" << "\\bif\\b" << "\\belse\\b"
                      << "\\bwhile\\b" << "\\bfor\\b" << "\\breturn\\b"
-                     << "\\bint\\b" << "\\bfloat\\b" << "\\bvoid\\b";
+                     << "\\bint\\b" << "\\bfloat\\b" << "\\bvoid\\b"
+                     << "\\bprintln!\\b";
 
     // 设置关键字格式
     keyword_format.setForeground(QColor(86, 157, 214)); // #569CD6
