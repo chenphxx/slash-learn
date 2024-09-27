@@ -12,6 +12,10 @@ E-Main: john201950@outlook.com
 VX: XieG0110
 ```
 
+## 说明
+
+从`V2024.9.27`版本开始, 程序数据库由`MySQL`改为`SQLite`, MySQL版本的程序迁移至分支`mysql`并且不再提供更新和维护 
+
 ## V2024.9.27
 
 1. 将程序使用的数据库从`MySQL`更改到了`SQLite` 
@@ -83,12 +87,12 @@ VX: XieG0110
 ```sql
 CREATE TABLE C
 (
-	number_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
-	zh_index VARCHAR(50),
-	en_index VARCHAR(50),
-	code_snippet TEXT,
-	zh_comment TEXT,
-	PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
+    number_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
+    zh_index VARCHAR(50),
+    en_index VARCHAR(50),
+    code_snippet TEXT,
+    zh_comment TEXT,
+    PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
 );
 ```
 
