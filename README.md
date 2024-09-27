@@ -3,6 +3,7 @@
 本项目是一款基于QT和MySQL开发的数据库查询软件, 包含了作者在开发和日常学习当中可能会用到的各种技术栈知识点 
 在搜索框中输入, 查询结果会在下方的控件当中显示 
 正常运行本程序, 需要本机安装有`MySQL`, 并且新建数据库`code_database`, 在数据库中新建查询表, 查询表需要具有以下结构: 
+
 ```sql
 CREATE TABLE C
 (
@@ -14,6 +15,7 @@ CREATE TABLE C
     PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
 );
 ```
+
 除此之外, 还需要在`QT`的编译器目录下添加编译好的MySQL驱动
 准备工作做完之后, 应该就能正常运行程序了, 程序尚未打包为独立的`.exe`文件, 需要用户自己手动编译打包 
 
@@ -26,9 +28,11 @@ E-Main: john201950@outlook.com
 VX: XieG0110
 ```
 
-## 说明 
+## 说明
 
-项目数据库已经改为`SQLite`, 本分支为`MySQL`版本, 后续将不再更新 
+项目数据库已经改为`SQLite`, 本分支为`MySQL`版本, 后续将不再更新, 程序所需的驱动已经编译好, 可以在在文件夹`drivers`中找到 
+
+请将`mingw_64`中的文件复制到QT安装目录下的`mingw_64\bin`目录下; 将`sqldrivers`中的文件复制到QT安装目录下的`mingw_64\plugins\sqldrivers`目录下, 具体路径根据QT安装的路径和编译器的不同有所区别 
 
 ## V2024.9.26
 
