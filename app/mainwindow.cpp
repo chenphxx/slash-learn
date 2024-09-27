@@ -54,11 +54,11 @@ void MainWindow::init_database()
     // 创建表 C 的 SQL 语句
     QString createCQuery = "CREATE TABLE IF NOT EXISTS C"
                            "("
-                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
-                           "zh_index VARCHAR(50), "  // 中文索引
-                           "en_index VARCHAR(50), "  // 英文索引
-                           "code_snippet TEXT, "  // 代码段
-                           "zh_comment TEXT"  // 中文注释
+                               "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
+                               "zh_index VARCHAR(50), "  // 中文索引
+                               "en_index VARCHAR(50), "  // 英文索引
+                               "code_snippet TEXT, "  // 代码段
+                               "zh_comment TEXT"  // 中文注释
                            ")";
     QSqlQuery query;
     // 执行创建 C 表的 SQL
@@ -86,11 +86,11 @@ void MainWindow::init_database()
                                    (
                                        "CREATE TABLE IF NOT EXISTS %1"
                                        "("
-                                       "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                       "zh_index VARCHAR(50), "
-                                       "en_index VARCHAR(50), "
-                                       "code_snippet TEXT, "
-                                       "zh_comment TEXT"
+                                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                           "zh_index VARCHAR(50), "
+                                           "en_index VARCHAR(50), "
+                                           "code_snippet TEXT, "
+                                           "zh_comment TEXT"
                                        ")"
                                        ).arg(lang);
 
