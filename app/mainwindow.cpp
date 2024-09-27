@@ -4,6 +4,11 @@
 #include "code_highlighter.h"
 
 
+// QString database_path;
+QString table = "C";  // 给定一个默认值
+unsigned int result_count = 0;  // 查询结果的数量
+int number_index = 0;  // 索引编号
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -14,43 +19,65 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
     // 创建数据库连接
-    db.setDatabaseName("../../sources/database/code_database.db");  // 数据库路径
+    QString default_path = "C:/Users/chenphxx/Documents/Project/code-database/app/sources/database/code_database.db";
+
+    // 从 QSettings 中读取保存的数据库路径
+    QSettings settings("code_database", "path");  // 注册表中的存储路径
+    QString database_path = settings.value("DatabasePath", default_path).toString();
+
+    db.setDatabaseName(database_path);  // 数据库路径
     if (!db.open())
     {
         QString errorMsg = "数据库连接失败: " + db.lastError().text();
         ui->statusbar->showMessage(errorMsg, 2000);
+
         qDebug() << errorMsg;
         return ;
     }
+    init_database();  // 初始化数据库结构
+}
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+
+/**
+ * @brief 初始化数据库
+ *
+ * @param NULL
+ * @return 无
+ */
+void MainWindow::init_database()
+{
     // 创建表 C 的 SQL 语句
-    QString createCQuery =
-        "CREATE TABLE IF NOT EXISTS C"
-        "("
-            "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
-            "zh_index VARCHAR(50), "  // 中文索引
-            "en_index VARCHAR(50), "  // 英文索引
-            "code_snippet TEXT, "  // 代码段
-            "zh_comment TEXT"  // 中文注释
-        ")";
+    QString createCQuery = "CREATE TABLE IF NOT EXISTS C"
+                           "("
+                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
+                           "zh_index VARCHAR(50), "  // 中文索引
+                           "en_index VARCHAR(50), "  // 英文索引
+                           "code_snippet TEXT, "  // 代码段
+                           "zh_comment TEXT"  // 中文注释
+                           ")";
     QSqlQuery query;
-
     // 执行创建 C 表的 SQL
     if (!query.exec(createCQuery))
     {
         QString errorMsg = "创建表 C 失败: " + query.lastError().text();
         QMessageBox::critical(this, "Error", errorMsg);
+
         qDebug() << errorMsg;
         return ;
     }
 
     // 其他表
     QStringList languages =
-    {
-        "CPP", "Rust", "Python", "MySQL", "Go",
-        "Lisp", "Assembly", "Java", "JavaScript", "HTML",
-        "CSS", "Git", "Docker", "Embed", "STM32", "C51", "QT", "SQLite"
-    };
+        {
+            "CPP", "Rust", "Python", "MySQL", "Go",
+            "Lisp", "Assembly", "Java", "JavaScript", "HTML",
+            "CSS", "Git", "Docker", "Embed", "STM32", "C51", "QT", "SQLite"
+        };
 
     // 循环创建每个表
     for (const QString &lang : languages)
@@ -59,13 +86,13 @@ MainWindow::MainWindow(QWidget *parent)
                                    (
                                        "CREATE TABLE IF NOT EXISTS %1"
                                        "("
-                                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                           "zh_index VARCHAR(50), "
-                                           "en_index VARCHAR(50), "
-                                           "code_snippet TEXT, "
-                                           "zh_comment TEXT"
+                                       "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                       "zh_index VARCHAR(50), "
+                                       "en_index VARCHAR(50), "
+                                       "code_snippet TEXT, "
+                                       "zh_comment TEXT"
                                        ")"
-                                    ).arg(lang);
+                                       ).arg(lang);
 
         // 执行创建表的 SQL 语句
         if (!query.exec(createTableQuery))
@@ -78,16 +105,38 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->showMessage("所有表创建成功", 2000);
 }
 
-MainWindow::~MainWindow()
+
+/**
+ * @brief 点击切换数据库位置
+ *
+ * @param NULL
+ * @return 无
+ */
+void MainWindow::on_change_database_path_clicked()
 {
-    delete ui;
+    QString dir = QFileDialog::getExistingDirectory(this, tr("选择数据库位置"), "/code_database",
+                                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if (!dir.isEmpty())
+    {
+        QString database_path = dir + "/code_database.db";
+        // 存储位置以便下一次打开软件时也能读取
+        QSettings settings("code_database", "path");
+        settings.setValue("DatabasePath", database_path);
+
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
+        db.setDatabaseName(database_path);
+        if (!db.open())
+        {
+            QString errorMsg = "数据库连接失败: " + db.lastError().text();
+            ui->statusbar->showMessage(errorMsg, 2000);
+
+            qDebug() << errorMsg;
+            return ;
+        }
+        init_database();
+    }
 }
-
-
-QString table = "C";  // 给定一个默认值
-unsigned int result_count = 0;  // 查询结果的数量
-int number_index = 0;  // 索引编号
-
 
 /**
  * @brief 切换数据库中的表
@@ -104,7 +153,7 @@ void MainWindow::on_language_switch_currentTextChanged(const QString &)
 }
 
 /**
-* @brief 根据输入的内容进行搜索
+* @brief 搜索功能
 *
 * @param NULL
 * @return 无
@@ -113,6 +162,8 @@ void MainWindow::on_search_button_clicked()
 {
     QSqlQuery query;  // 创建一个查询对象
     QString index = ui->search_box->text();  // 获取查询内容
+    int number_index = index.toInt();
+
     if(index.isEmpty())
     {
         ui->code_edit->setText("没有输入任何关键词\n");
@@ -121,13 +172,25 @@ void MainWindow::on_search_button_clicked()
         return;  // 结束当前查询
     }
 
-    // 使用参数化查询, 防止SQL注入风险
-    QString command = "SELECT * FROM " + table + " WHERE en_index = :index OR zh_index = :index";
-    if (index == "000")  // 000表示查询所有数据
-        command = "SELECT * FROM " + table;
+    if (number_index == 0)
+    {
+        // 使用参数化查询, 防止SQL注入风险
+        QString command = "SELECT * FROM " + table + " WHERE en_index = :index OR zh_index = :index";
+        if (index == "000")  // 000表示查询所有数据
+            command = "SELECT * FROM " + table;
 
-    query.prepare(command);
-    query.bindValue(":index", index);
+        query.prepare(command);
+        query.bindValue(":index", index);
+    }
+    else
+    {
+        QString command = "SELECT * FROM " + table + " WHERE number_index = :number_index";
+        if (index == "000")
+            command = "SELECT * FROM " + table;
+
+        query.prepare(command);
+        query.bindValue(":number_index", number_index);
+    }
 
     // 清空之前的查询结果
     ui->code_edit->clear();

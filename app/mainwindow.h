@@ -9,6 +9,7 @@
 #include <QDebug>  // 控制台输出
 #include <QMessageBox>  // 消息弹窗
 #include <QDialog>  // dialog
+#include <QFileDialog>
 
 
 QT_BEGIN_NAMESPACE
@@ -98,6 +99,22 @@ class MainWindow : public QMainWindow
          * @return 无
          */
         void on_language_switch_currentTextChanged(const QString &arg1);
+
+        /**
+         * @brief 点击切换数据库位置
+         *
+         * @param NULL
+         * @return 无
+         */
+        void on_change_database_path_clicked();
+
+        /**
+         * @brief 初始化数据库
+         *
+         * @param NULL
+         * @return 无
+         */
+        void init_database();
 
     private:
         Ui::MainWindow *ui;

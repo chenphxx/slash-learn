@@ -17,9 +17,9 @@
    <widget class="QLineEdit" name="search_box">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>170</x>
       <y>80</y>
-      <width>581</width>
+      <width>471</width>
       <height>41</height>
      </rect>
     </property>
@@ -515,9 +515,9 @@ color: rgb(185, 187, 223);</string>
    <widget class="QPushButton" name="search_button">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>660</x>
       <y>80</y>
-      <width>191</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
@@ -576,6 +576,38 @@ background-color: rgb(185, 187, 223);
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="change_database_path">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;搜索&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);
+</string>
+    </property>
+    <property name="text">
+     <string>数据库切换</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+    </property>
+   </widget>
    <zorder>search_box</zorder>
    <zorder>language_switch</zorder>
    <zorder>language_label</zorder>
@@ -584,6 +616,7 @@ background-color: rgb(185, 187, 223);
    <zorder>comment_frame</zorder>
    <zorder>number_index_browser</zorder>
    <zorder>search_button</zorder>
+   <zorder>change_database_path</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -22,6 +22,14 @@ VX: XieG0110
 
 4. `Language`改为`Tech-Stack` 
 
+5. 修改了项目结构, 删除了一些不需要的测试文件 
+
+6. 新增了切换数据库位置的功能 
+
+7. 新增了根据`number_index`查找数据的功能, 方便进行数据的修改 
+
+8. 为`另存为`界面新增了根据`number_index`修改现有数据的功能 
+
 ## V2024.9.26
 
 1. 为软件中的按键添加了圆角设计, 更改了部分控件以及文字的配色 
@@ -70,4 +78,20 @@ VX: XieG0110
 
 ## V2024.9.19
 
-第一个可以正常使用的版本开发完成, 可以通过搜索中文以及英文索引来查找信息 
+第一个可以正常使用的版本开发完成, 可以通过搜索中文以及英文索引来查找信息; 需要本机安装有`MySQL`, 并且新建数据库`code_database`, 在数据库中新建查询表, 查询表需要具有以下结构: 
+
+```sql
+CREATE TABLE C
+(
+	number_index INT AUTO_INCREMENT,  -- 自动递增列, 数据类型必须为整数
+	zh_index VARCHAR(50),
+	en_index VARCHAR(50),
+	code_snippet TEXT,
+	zh_comment TEXT,
+	PRIMARY KEY (number_index)  -- 主键必须是 AUTO_INCREMENT 列
+);
+```
+
+除此之外, 还需要在`QT`的编译器目录下添加编译好的MySQL驱动 
+
+准备工作做完之后, 应该就能正常运行程序了, 程序尚未打包为独立的`.exe`文件, 需要用户自己手动打包 

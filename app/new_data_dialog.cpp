@@ -13,9 +13,7 @@ new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
     ui->setupUi(this);
 
     new code_highlighter(ui->new_data_code_edit->document());  // 应用代码高亮
-
-    ui->language_switch->setCurrentText(table_receive);  // 设置默认选项
-    qDebug() << "传递过来的table值为: " << table_receive;
+    ui->language_switch->setCurrentText(table_receive);  // 根据传递过来的值调整选项
 }
 
 new_data_dialog::~new_data_dialog()
@@ -47,41 +45,42 @@ void new_data_dialog::on_new_data_save_clicked()
     QSqlQuery query;
 
     QString zh_index = ui->new_data_zh_index->text();
-    if (zh_index.isEmpty())
-    {
-        QMessageBox::information(this, "title", "zh_index为空, 请输入");
-        return ;
-    }
     QString en_index = ui->new_data_en_index->text();
-    if (en_index.isEmpty())
-    {
-        QMessageBox::information(this, "title", "en_index为空, 请输入");
-        return ;
-    }
     QString code = ui->new_data_code_edit->toPlainText();
-    if (code.isEmpty())
-    {
-        QMessageBox::information(this, "title", "code为空, 请输入");
-        return ;
-    }
     QString comment = ui->new_data_comment_edit->toPlainText();
-    if (comment.isEmpty())
+    QString number_index = ui->new_data_number_index->text();
+    QString command;
+
+    // 是否输入了数据
+    bool zh_flag = !zh_index.isEmpty();
+    bool en_flag = !en_index.isEmpty();
+    bool code_flag = !code.isEmpty();
+    bool comment_flag = !comment.isEmpty();
+
+    if (zh_flag && en_flag && code_flag && comment_flag)
     {
-        QMessageBox::information(this, "title", "comment为空, 请输入");
+        if (!number_index.isEmpty() && number_index.toInt() != 0)
+            command = "UPDATE " + table_receive + " SET zh_index = :zh_index, en_index = :en_index, code_snippet = :code_snippet, "
+                                                  "zh_comment = :zh_comment WHERE number_index = " + number_index + " ;";
+        else
+            command = "INSERT INTO " + table_receive + " (zh_index, en_index, code_snippet, zh_comment) "
+                                                       "VALUES (:zh_index, :en_index, :code_snippet, :zh_comment)";
+    }
+    else
+    {
+        QMessageBox::information(this, "title", "有数据未输入");
         return ;
     }
 
-    QString command = "INSERT INTO " + table_receive + " (zh_index, en_index, code_snippet, zh_comment) VALUES (:zh_index, :en_index, :code_snippet, :zh_comment)";
     query.prepare(command);
     query.bindValue(":zh_index", zh_index);
     query.bindValue(":en_index", en_index);
     query.bindValue(":code_snippet", code);
     query.bindValue(":zh_comment", comment);
-
     if (query.exec())
-        QMessageBox::information(this, "title", "保存成功");
+        QMessageBox::information(this, "title", "保存/修改成功");
     else
-        QMessageBox::information(this, "title", "保存失败");
+        QMessageBox::information(this, "title", "保存/修改失败");
 }
 
 /**
