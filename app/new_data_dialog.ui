@@ -338,7 +338,15 @@ background-color: rgb(185, 187, 223);</string>
    </item>
    <item>
     <property name="text">
-     <string>GIT</string>
+     <string>Git</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Docker</string>
     </property>
     <property name="icon">
      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>

@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>611</width>
+      <width>581</width>
       <height>41</height>
      </rect>
     </property>
@@ -174,7 +174,15 @@
     </item>
     <item>
      <property name="text">
-      <string>GIT</string>
+      <string>Git</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Docker</string>
      </property>
      <property name="icon">
       <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
@@ -208,9 +216,9 @@
    <widget class="QLabel" name="language_label">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>820</x>
       <y>80</y>
-      <width>111</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
@@ -225,7 +233,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#5e17eb;&quot;&gt;Language:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#5e17eb;&quot;&gt;Tech-Stack:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QFrame" name="code_frame">
@@ -507,7 +515,7 @@ color: rgb(185, 187, 223);</string>
    <widget class="QPushButton" name="search_button">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>610</x>
       <y>80</y>
       <width>191</width>
       <height>41</height>

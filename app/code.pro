@@ -23,7 +23,7 @@ FORMS += \
     mainwindow.ui \
     new_data_dialog.ui
 
-RC_ICONS = sources/code_database.ico  # 添加logo
+RC_ICONS = sources/icon/code_database.ico  # 添加logo
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

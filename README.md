@@ -18,7 +18,9 @@ VX: XieG0110
 
 2. 新的数据库将存储在目录`sources`下的`database`文件夹中 
 
-3. 添加了表`Embed` `QT` `SQLite` 
+3. 添加了表`Embed` `QT` `SQLite` `Docker` 
+
+4. `Language`改为`Tech-Stack` 
 
 ## V2024.9.26
 

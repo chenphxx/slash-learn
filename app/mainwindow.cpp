@@ -47,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent)
     // 其他表
     QStringList languages =
     {
-        "CPP", "Rust", "Python", "MySQL", "Git", "Go",
+        "CPP", "Rust", "Python", "MySQL", "Go",
         "Lisp", "Assembly", "Java", "JavaScript", "HTML",
-        "CSS", "Embed", "STM32", "C51", "QT", "SQLite"
+        "CSS", "Git", "Docker", "Embed", "STM32", "C51", "QT", "SQLite"
     };
 
     // 循环创建每个表
