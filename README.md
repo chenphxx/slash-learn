@@ -30,7 +30,7 @@ VX: XieG0110
 
 ## 说明
 
-项目数据库已经改为`SQLite`, 本分支为`MySQL`版本, 后续将不再更新, 程序所需的驱动已经编译好, 可以在在文件夹`drivers`中找到 
+项目数据库已经改为`SQLite`, 本分支为`MySQL`版本, 后续将不再更新, 程序所需的驱动已经编译好, 可以在文件夹`drivers`中找到 
 
 请将`mingw_64`中的文件复制到QT安装目录下的`mingw_64\bin`目录下; 将`sqldrivers`中的文件复制到QT安装目录下的`mingw_64\plugins\sqldrivers`目录下, 具体路径根据QT安装的路径和编译器的不同有所区别 
 
