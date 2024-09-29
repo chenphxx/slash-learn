@@ -65,11 +65,21 @@ void MainWindow::init_table()
 
         return ;
     }
+
+    // 将除了"New Table" "Refresh"之外的选项都删除
+    for (int i = ui->language_switch->count() - 1; i >= 0; --i)
+    {
+        if (ui->language_switch->itemText(i) != "New Table" && ui->language_switch->itemText(i) != "Refresh")
+        {
+            ui->language_switch->removeItem(i);
+        }
+    }
+
     while (query.next())
     {
         QString table_name = query.value(0).toString();
         int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
-        int position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
+        int position = (count >= 3) ? count - 3 : 0;  // 计算倒数第三个位置
 
         if (ui->language_switch->findText(table_name) == -1)
         {
@@ -133,7 +143,10 @@ void MainWindow::on_language_switch_activated(int)
         connect(dialog, &new_table::send_table_name, this, &MainWindow::receive_table_name);  // 连接槽函数用于接收table_name
         dialog->show();
     }
-    init_table();  // 新建表后更新列表选项
+    else if (table == "Refresh")
+    {
+        init_table();
+    }
 }
 
 /**
@@ -148,10 +161,10 @@ void MainWindow::receive_table_name(const QString &table_name)
     if (ui->language_switch->findText(table_name) == -1)
     {
         int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
-        int insert_position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
 
         QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
-        ui->language_switch->insertItem(insert_position, icon, table_name);  // 插入选项
+        ui->language_switch->insertItem(count, icon, table_name);  // 插入选项
+        ui->language_switch->setCurrentText(table_name);
     }
 }
 

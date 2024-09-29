@@ -232,6 +232,14 @@ background-color: rgb(185, 187, 223);</string>
      <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Refresh</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">

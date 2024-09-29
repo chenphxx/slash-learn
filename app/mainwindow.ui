@@ -68,6 +68,14 @@
       <iconset theme="document-new"/>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>Refresh</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+     </property>
+    </item>
    </widget>
    <widget class="QLabel" name="language_label">
     <property name="geometry">

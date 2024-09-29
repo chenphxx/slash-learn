@@ -41,33 +41,43 @@ void new_data_dialog::init_table()
 
         return ;
     }
+
+    // 将除了"New Table" "Refresh"之外的选项都删除
+    for (int i = ui->language_switch->count() - 1; i >= 0; --i)
+    {
+        if (ui->language_switch->itemText(i) != "New Table" && ui->language_switch->itemText(i) != "Refresh")
+        {
+            ui->language_switch->removeItem(i);
+        }
+    }
+
     while (query.next())
     {
-        QString table = query.value(0).toString();
+        QString table_name = query.value(0).toString();
         int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
-        int position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
+        int position = (count >= 3) ? count - 3 : 0;  // 计算倒数第三个位置
 
-        if (ui->language_switch->findText(table) == -1)
+        if (ui->language_switch->findText(table_name) == -1)
         {
             QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
-            ui->language_switch->insertItem(position, icon, table);
+            ui->language_switch->insertItem(position, icon, table_name);
             ui->language_switch->setCurrentText(query.value(0).toString());  // 设置默认值
         }
     }
 }
 
 /**
- * @brief 更新table_receive
+ * @brief 切换数据表
  *
  * @param NULL
  * @return 无
  */
 void new_data_dialog::on_language_switch_activated(int)
 {
-    table_receive = ui->language_switch->currentText();
-    if (table_receive == "C++")
-        table_receive = "CPP";
-    if (table_receive == "New Table")  // 使用new_table新建数据表
+    QString table = ui->language_switch->currentText();  // 获取从mainwindow传过来的值
+    if (table == "C++")
+        table = "CPP";
+    if (table == "New Table")  // 使用new_table新建数据表
     {
         new_table *dialog = new new_table(this);
         dialog->setModal(false);
@@ -75,19 +85,27 @@ void new_data_dialog::on_language_switch_activated(int)
         connect(dialog, &new_table::send_table_name, this, &new_data_dialog::receive_table_name);  // 连接槽函数用于接收table_name
         dialog->show();
     }
-    init_table();  // 新建表后更新列表选项
+    else if (table == "Refresh")
+    {
+        init_table();
+    }
 }
 
+/**
+ * @brief 从new_table接收table_name, 并插入到combobox
+ *
+ * @param table_name
+ * @return 无
+ */
 void new_data_dialog::receive_table_name(const QString &table_name)
 { 
     // 检查是否已经存在相同的项
     if (ui->language_switch->findText(table_name) == -1)
     {
         int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
-        int insert_position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
 
         QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
-        ui->language_switch->insertItem(insert_position, icon, table_name);  // 插入选项
+        ui->language_switch->insertItem(count, icon, table_name);  // 插入选项
     }
 }
 
