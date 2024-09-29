@@ -50,6 +50,14 @@ private slots:
      */
     void on_new_data_delete_clicked();
 
+    /**
+     * @brief 清空输入框
+     *
+     * @param NULL
+     * @return 无
+     */
+    void on_new_data_clear_clicked();
+
 private:
     Ui::new_data_dialog *ui;
     QString table_receive;  // 添加table变量 从mainwindow接收

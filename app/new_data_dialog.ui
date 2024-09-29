@@ -47,9 +47,9 @@ background-color: rgb(185, 187, 223);
   <widget class="QPushButton" name="new_data_cancel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>130</x>
      <y>360</y>
-     <width>191</width>
+     <width>91</width>
      <height>41</height>
     </rect>
    </property>
@@ -71,7 +71,7 @@ background-color: rgb(185, 187, 223);</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::WindowClose"/>
+    <iconset theme="QIcon::ThemeIcon::SystemLogOut"/>
    </property>
   </widget>
   <widget class="QTextEdit" name="new_data_code_edit">
@@ -468,6 +468,36 @@ background-color: rgb(185, 187, 223);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius:10px;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="new_data_clear">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>360</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditClear"/>
    </property>
   </widget>
  </widget>

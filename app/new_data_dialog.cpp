@@ -126,6 +126,21 @@ void new_data_dialog::on_new_data_delete_clicked()
 }
 
 /**
+ * @brief 清空输入框
+ *
+ * @param NULL
+ * @return 无
+ */
+void new_data_dialog::on_new_data_clear_clicked()
+{
+    ui->new_data_number_index->clear();
+    ui->new_data_zh_index->clear();
+    ui->new_data_en_index->clear();
+    ui->new_data_code_edit->clear();
+    ui->new_data_comment_edit->clear();
+}
+
+/**
  * @brief 关闭dialog
  *
  * @param NULL
