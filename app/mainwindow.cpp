@@ -18,8 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     new code_highlighter(ui->code_edit->document());  // 应用代码高亮
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
-    // 创建数据库连接
-    QString default_path = "C:/Users/chenphxx/Documents/Project/code-database/app/sources/database/code_database.db";
+
+    // 获取当前.exe路径并定位到sources文件夹
+    QString exe_path = QCoreApplication::applicationDirPath();
+    QDir project_path(exe_path);
+    project_path.cdUp();  // 上一级目录
+    project_path.cdUp();
+    project_path.cdUp();
+    QString default_path = project_path.filePath("sources/database/code_database.db");
 
     // 从 QSettings 中读取保存的数据库路径
     QSettings settings("code_database", "path");  // 注册表中的存储路径
@@ -29,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (!db.open())
     {
         QString errorMsg = "数据库连接失败: " + db.lastError().text();
-        ui->statusbar->showMessage(errorMsg, 2000);
+        ui->statusbar->showMessage(errorMsg, 3000);
 
         qDebug() << errorMsg;
         return ;
