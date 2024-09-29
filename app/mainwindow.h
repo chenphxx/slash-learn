@@ -98,7 +98,15 @@ class MainWindow : public QMainWindow
          * @param index 选项
          * @return 无
          */
-        void on_language_switch_currentTextChanged(const QString &arg1);
+        void on_language_switch_activated(int);
+
+        /**
+         * @brief 接收dialog发送过来的table_name
+         *
+         * @param table_name
+         * @return 无
+         */
+        void receive_table_name(const QString &table_name);
 
         /**
          * @brief 点击切换数据库位置
@@ -109,12 +117,20 @@ class MainWindow : public QMainWindow
         void on_change_database_path_clicked();
 
         /**
-         * @brief 初始化数据库
+         * @brief 初始化技术栈列表
          *
          * @param NULL
          * @return 无
          */
-        void init_database();
+        void init_table();
+
+        /**
+         * @brief 通过语句查询
+         *
+         * @param NULL
+         * @return 无
+         */
+        void on_search_query_button_clicked();
 
     private:
         Ui::MainWindow *ui;

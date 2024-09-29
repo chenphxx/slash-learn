@@ -40,7 +40,17 @@ private slots:
      * @param NULL
      * @return 无
      */
-    void on_language_switch_currentTextChanged(const QString &);
+    void on_language_switch_activated(int);
+
+    void receive_table_name(const QString &table_name);
+
+    /**
+     * @brief 初始化技术栈列表
+     *
+     * @param NULL
+     * @return 无
+     */
+    void init_table();
 
     /**
      * @brief 删除数据

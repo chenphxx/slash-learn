@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "new_data_dialog.h"
+#include "query_execute.h"
+#include "new_table.h"
 #include "code_highlighter.h"
 
 
-// QString database_path;
 QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
 int number_index = 0;  // 索引编号
@@ -16,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     new code_highlighter(ui->code_edit->document());  // 应用代码高亮
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
 
     // 获取当前.exe路径并定位到sources文件夹
@@ -37,10 +37,9 @@ MainWindow::MainWindow(QWidget *parent)
         QString errorMsg = "数据库连接失败: " + db.lastError().text();
         ui->statusbar->showMessage(errorMsg, 3000);
 
-        qDebug() << errorMsg;
         return ;
     }
-    init_database();  // 初始化数据库结构
+    init_table();
 }
 
 MainWindow::~MainWindow()
@@ -50,67 +49,36 @@ MainWindow::~MainWindow()
 
 
 /**
- * @brief 初始化数据库
+ * @brief 初始化技术栈列表
  *
  * @param NULL
  * @return 无
  */
-void MainWindow::init_database()
+void MainWindow::init_table()
 {
-    // 创建表 C 的 SQL 语句
-    QString createCQuery = "CREATE TABLE IF NOT EXISTS C"
-                           "("
-                               "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "  // 自增主键
-                               "zh_index VARCHAR(50), "  // 中文索引
-                               "en_index VARCHAR(50), "  // 英文索引
-                               "code_snippet TEXT, "  // 代码段
-                               "zh_comment TEXT"  // 中文注释
-                           ")";
+    QString command = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';";
     QSqlQuery query;
-    // 执行创建 C 表的 SQL
-    if (!query.exec(createCQuery))
+    if (!query.exec(command))
     {
-        QString errorMsg = "创建表 C 失败: " + query.lastError().text();
-        QMessageBox::critical(this, "Error", errorMsg);
+        QString error_msg = "表名查询失败: " + query.lastError().text();
+        QMessageBox::information(this, "title", error_msg);
 
-        qDebug() << errorMsg;
         return ;
     }
-
-    // 其他表
-    QStringList languages =
-        {
-            "CPP", "Rust", "Python", "MySQL", "Go",
-            "Lisp", "Assembly", "Java", "JavaScript", "HTML",
-            "CSS", "Git", "Docker", "Embed", "STM32", "C51", "QT", "SQLite"
-        };
-
-    // 循环创建每个表
-    for (const QString &lang : languages)
+    while (query.next())
     {
-        QString createTableQuery = QString
-                                   (
-                                       "CREATE TABLE IF NOT EXISTS %1"
-                                       "("
-                                           "number_index INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                           "zh_index VARCHAR(50), "
-                                           "en_index VARCHAR(50), "
-                                           "code_snippet TEXT, "
-                                           "zh_comment TEXT"
-                                       ")"
-                                       ).arg(lang);
+        QString table_name = query.value(0).toString();
+        int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
+        int position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
 
-        // 执行创建表的 SQL 语句
-        if (!query.exec(createTableQuery))
+        if (ui->language_switch->findText(table_name) == -1)
         {
-            QString errorMsg = QString("创建表 %1 失败: %2").arg(lang, query.lastError().text());
-            QMessageBox::critical(this, "Error", errorMsg);
-            qDebug() << errorMsg;
+            QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
+            ui->language_switch->insertItem(position, icon, table_name);
+            ui->language_switch->setCurrentText(query.value(0).toString());  // 设置默认值
         }
     }
-    ui->statusbar->showMessage("所有表创建成功", 2000);
 }
-
 
 /**
  * @brief 点击切换数据库位置
@@ -140,22 +108,51 @@ void MainWindow::on_change_database_path_clicked()
             qDebug() << errorMsg;
             return ;
         }
-        init_database();
+        init_table();
     }
 }
 
 /**
  * @brief 切换数据库中的表
  *
- * @param index 选项
+ * @param NULL
  * @return 无
  */
-void MainWindow::on_language_switch_currentTextChanged(const QString &)
+void MainWindow::on_language_switch_activated(int)
 {
-    table = ui->language_switch->currentText();  // 当前选择的选项
-    ui->statusbar->showMessage(table, 1000);
+    table = ui->language_switch->currentText();
+    ui->statusbar->showMessage(ui->language_switch->currentText(), 2000);
+
     if (table == "C++")
         table = "CPP";
+    if (table == "New Table")  // 打开new_table新建数据表
+    {
+        new_table *dialog = new new_table(this);
+        dialog->setModal(false);
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dialog, &new_table::send_table_name, this, &MainWindow::receive_table_name);  // 连接槽函数用于接收table_name
+        dialog->show();
+    }
+    init_table();  // 新建表后更新列表选项
+}
+
+/**
+ * @brief 从new_table接收table_name, 并插入到combobox
+ *
+ * @param table_name
+ * @return 无
+ */
+void MainWindow::receive_table_name(const QString &table_name)
+{ 
+    // 检查是否已经存在相同的项
+    if (ui->language_switch->findText(table_name) == -1)
+    {
+        int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
+        int insert_position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
+
+        QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
+        ui->language_switch->insertItem(insert_position, icon, table_name);  // 插入选项
+    }
 }
 
 /**
@@ -186,7 +183,6 @@ void MainWindow::on_search_button_clicked()
             command = "SELECT * FROM " + table;
 
         query.prepare(command);
-        query.bindValue(":index", index);
     }
     else
     {
@@ -209,6 +205,7 @@ void MainWindow::on_search_button_clicked()
         QString error = "查询失败: " + query.lastError().text();
         ui->code_edit->setText(error);
         ui->comment_edit->setText(error);
+
         return;
     }
 
@@ -373,15 +370,29 @@ void MainWindow::on_comment_clear_clicked()
 }
 
 /**
- * @brief 将code_edit和comment_edit另存为新的数据
+ * @brief 另存为界面
  *
  * @param NULL
  * @return 无
  */
 void MainWindow::on_save_as_clicked()
 {
-    new_data_dialog *new_dialog = new new_data_dialog(table, this);  // 在堆上创建一个QDialog实例
-    new_dialog->setModal(false);  // 设置为非模态
-    new_dialog->setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除对象
-    new_dialog->show();  // 非模态形式 保持主窗口可访问
+    new_data_dialog *dialog = new new_data_dialog(table, this);  // 在堆上创建一个QDialog实例
+    dialog->setModal(false);  // 设置为非模态
+    dialog->setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除对象
+    dialog->show();  // 非模态形式 保持主窗口可访问
+}
+
+/**
+ * @brief 执行查询语句
+ *
+ * @param NULL
+ * @return 无
+ */
+void MainWindow::on_search_query_button_clicked()
+{
+    query_execute *dialog = new query_execute(this);
+    dialog->setModal(false);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->show();
 }

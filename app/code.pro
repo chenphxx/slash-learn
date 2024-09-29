@@ -12,16 +12,22 @@ SOURCES += \
     code_highlighter.cpp \
     main.cpp \
     mainwindow.cpp \
-    new_data_dialog.cpp
+    new_data_dialog.cpp \
+    new_table.cpp \
+    query_execute.cpp
 
 HEADERS += \
     code_highlighter.h \
     mainwindow.h \
-    new_data_dialog.h
+    new_data_dialog.h \
+    new_table.h \
+    query_execute.h
 
 FORMS += \
     mainwindow.ui \
-    new_data_dialog.ui
+    new_data_dialog.ui \
+    new_table.ui \
+    query_execute.ui
 
 RC_ICONS = sources/icon/code_database.ico  # 添加logo
 

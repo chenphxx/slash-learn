@@ -1,5 +1,6 @@
 #include "new_data_dialog.h"
 #include "ui_new_data_dialog.h"
+#include "new_table.h"
 #include "code_highlighter.h"
 
 #include <QtSql>
@@ -14,11 +15,45 @@ new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
 
     new code_highlighter(ui->new_data_code_edit->document());  // 应用代码高亮
     ui->language_switch->setCurrentText(table_receive);  // 根据传递过来的值调整选项
+    init_table();  // 更新列表选项
 }
 
 new_data_dialog::~new_data_dialog()
 {
     delete ui;
+}
+
+
+/**
+ * @brief 初始化技术栈列表
+ *
+ * @param NULL
+ * @return 无
+ */
+void new_data_dialog::init_table()
+{
+    QString command = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';";
+    QSqlQuery query;
+    if (!query.exec(command))
+    {
+        QString error_msg = "表名查询失败: " + query.lastError().text();
+        QMessageBox::information(this, "title", error_msg);
+
+        return ;
+    }
+    while (query.next())
+    {
+        QString table = query.value(0).toString();
+        int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
+        int position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
+
+        if (ui->language_switch->findText(table) == -1)
+        {
+            QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
+            ui->language_switch->insertItem(position, icon, table);
+            ui->language_switch->setCurrentText(query.value(0).toString());  // 设置默认值
+        }
+    }
 }
 
 /**
@@ -27,11 +62,33 @@ new_data_dialog::~new_data_dialog()
  * @param NULL
  * @return 无
  */
-void new_data_dialog::on_language_switch_currentTextChanged(const QString &)
+void new_data_dialog::on_language_switch_activated(int)
 {
     table_receive = ui->language_switch->currentText();
     if (table_receive == "C++")
         table_receive = "CPP";
+    if (table_receive == "New Table")  // 使用new_table新建数据表
+    {
+        new_table *dialog = new new_table(this);
+        dialog->setModal(false);
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dialog, &new_table::send_table_name, this, &new_data_dialog::receive_table_name);  // 连接槽函数用于接收table_name
+        dialog->show();
+    }
+    init_table();  // 新建表后更新列表选项
+}
+
+void new_data_dialog::receive_table_name(const QString &table_name)
+{ 
+    // 检查是否已经存在相同的项
+    if (ui->language_switch->findText(table_name) == -1)
+    {
+        int count = ui->language_switch->count();  // 获取当前 ComboBox 中的选项数量
+        int insert_position = (count > 0) ? count - 1 : 0;  // 计算倒数第二个位置
+
+        QIcon icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);  // 图标
+        ui->language_switch->insertItem(insert_position, icon, table_name);  // 插入选项
+    }
 }
 
 /**

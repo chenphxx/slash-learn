@@ -17,7 +17,7 @@
    <widget class="QLineEdit" name="search_box">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>120</x>
       <y>80</y>
       <width>471</width>
       <height>41</height>
@@ -62,154 +62,10 @@
     </property>
     <item>
      <property name="text">
-      <string>C</string>
+      <string>New Table</string>
      </property>
      <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>C++</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Rust</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Go</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Python</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Lisp</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Assembly</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Java</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>JavaScript</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>HTML</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>CSS</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Embed</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>STM32</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>C51</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Git</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Docker</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>QT</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>MySQL</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>SQLite</string>
-     </property>
-     <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+      <iconset theme="document-new"/>
      </property>
     </item>
    </widget>
@@ -515,9 +371,9 @@ color: rgb(185, 187, 223);</string>
    <widget class="QPushButton" name="search_button">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>600</x>
       <y>80</y>
-      <width>141</width>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
@@ -538,7 +394,7 @@ background-color: rgb(185, 187, 223);
 </string>
     </property>
     <property name="text">
-     <string/>
+     <string>索引</string>
     </property>
     <property name="icon">
      <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
@@ -581,7 +437,7 @@ background-color: rgb(185, 187, 223);
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>141</width>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
@@ -608,6 +464,38 @@ background-color: rgb(185, 187, 223);
      <iconset theme="QIcon::ThemeIcon::FolderNew"/>
     </property>
    </widget>
+   <widget class="QPushButton" name="search_query_button">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>80</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;搜索&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);
+</string>
+    </property>
+    <property name="text">
+     <string>语句</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
+    </property>
+   </widget>
    <zorder>search_box</zorder>
    <zorder>language_switch</zorder>
    <zorder>language_label</zorder>
@@ -617,6 +505,7 @@ background-color: rgb(185, 187, 223);
    <zorder>number_index_browser</zorder>
    <zorder>search_button</zorder>
    <zorder>change_database_path</zorder>
+   <zorder>search_query_button</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
