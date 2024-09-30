@@ -33,7 +33,7 @@ void query_execute::on_query_execute_button_clicked()
     ui->result_browser->clear();  // 清空之前的结果
     if(!query.exec())
     {
-        QString error = "语句执行失败, 请重试:\n" + query.lastError().text();
+        QString error = "执行失败, 请重试:\n" + query.lastError().text();
         ui->result_browser->setText(error);
 
         return;

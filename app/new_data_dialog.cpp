@@ -36,7 +36,7 @@ void new_data_dialog::init_table()
     QSqlQuery query;
     if (!query.exec(command))
     {
-        QString error_msg = "表名查询失败: " + query.lastError().text();
+        QString error_msg = "表名获取失败: " + query.lastError().text();
         QMessageBox::information(this, "title", error_msg);
 
         return ;

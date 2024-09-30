@@ -60,7 +60,7 @@ void MainWindow::init_table()
     QSqlQuery query;
     if (!query.exec(command))
     {
-        QString error_msg = "表名查询失败: " + query.lastError().text();
+        QString error_msg = "表名获取失败: " + query.lastError().text();
         QMessageBox::information(this, "title", error_msg);
 
         return ;
@@ -98,13 +98,13 @@ void MainWindow::init_table()
  */
 void MainWindow::on_change_database_path_clicked()
 {
-    QString dir = QFileDialog::getExistingDirectory(this, tr("选择数据库位置"), "/code_database",
+    QString dir = QFileDialog::getExistingDirectory(this, tr("选择数据库保存的位置"), "/code_database",
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if (!dir.isEmpty())
     {
         QString database_path = dir + "/code_database.db";
-        // 存储位置以便下一次打开软件时也能读取
+        // 存储位置到注册表以便下一次打开软件时也能读取
         QSettings settings("code_database", "path");
         settings.setValue("DatabasePath", database_path);
 
@@ -115,7 +115,6 @@ void MainWindow::on_change_database_path_clicked()
             QString errorMsg = "数据库连接失败: " + db.lastError().text();
             ui->statusbar->showMessage(errorMsg, 2000);
 
-            qDebug() << errorMsg;
             return ;
         }
         init_table();
@@ -178,12 +177,12 @@ void MainWindow::on_search_button_clicked()
 {
     QSqlQuery query;  // 创建一个查询对象
     QString index = ui->search_box->text();  // 获取查询内容
-    int number_index = index.toInt();
+    number_index = index.toInt();
 
     if(index.isEmpty())
     {
-        ui->code_edit->setText("没有输入任何关键词\n");
-        ui->comment_edit->setText("没有输入任何关键词\n");
+        ui->code_edit->setText("请输入关键词进行查找\n");
+        ui->comment_edit->setText("请输入关键词进行查找\n");
         result_count = 0;
         return;  // 结束当前查询
     }
@@ -274,7 +273,7 @@ void MainWindow::on_code_copy_clicked()
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(code);
 
-    ui->statusbar->showMessage("code已复制到剪贴板", 1000);
+    ui->statusbar->showMessage("code已复制到剪贴板", 2000);
 }
 
 /**
@@ -290,7 +289,7 @@ void MainWindow::on_comment_copy_clicked()
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(comment);
 
-    ui->statusbar->showMessage("comment已复制到剪贴板", 1000);
+    ui->statusbar->showMessage("comment已复制到剪贴板", 2000);
 }
 
 /**
@@ -306,21 +305,25 @@ void MainWindow::on_code_save_clicked()
 
     if (result_count == 0)
     {
-        QMessageBox::information(this, "title", "没有任何查询结果, 无法保存");
+        QMessageBox::information(this, "title", "没有查询到结果, 保存失败");
     }
     else if (result_count == 1)
     {
-        QString command = "UPDATE " + table + " SET code_snippet = :code WHERE number_index = :index";
+        QString command = "UPDATE " + table + " SET code_snippet = :code WHERE number_index = " + QString::number(number_index);
         query.prepare(command);
         query.bindValue(":code", code);
-        query.bindValue(":index", number_index);
 
         // 执行更新语句
         query.exec();
         if (query.exec())
-            ui->statusbar->showMessage("代码已成功保存", 1000);
+        {
+            QMessageBox::information(this, "title", "保存成功");
+        }
         else
-            ui->statusbar->showMessage("代码保存失败: " + query.lastError().text(), 3000);
+        {
+            QString error_msg = "保存失败: " + query.lastError().text();
+            QMessageBox::information(this, "title", error_msg);
+        }
     }
     else
     {
@@ -341,19 +344,24 @@ void MainWindow::on_comment_save_clicked()
 
     if (result_count == 0)
     {
-        QMessageBox::information(this, "title", "没有检测到内容, 无法保存");
+        QMessageBox::information(this, "title", "没有查询到结果, 保存失败");
     }
     else if (result_count == 1)
     {
-        QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE number_index = :index";
+        QString command = "UPDATE " + table + " SET zh_comment = :comment WHERE number_index = " + QString::number(number_index);
         query.prepare(command);
         query.bindValue(":comment", comment);
-        query.bindValue(":index", number_index);
 
+        query.exec();
         if (query.exec())
-            ui->statusbar->showMessage("注释已成功保存", 1000);
+        {
+            QMessageBox::information(this, "title", "保存成功");
+        }
         else
-            ui->statusbar->showMessage("注释保存失败: " + query.lastError().text(), 3000);
+        {
+            QString error_msg = "保存失败: " + query.lastError().text();
+            QMessageBox::information(this, "title", error_msg);
+        }
     }
     else
     {
@@ -370,7 +378,7 @@ void MainWindow::on_comment_save_clicked()
 void MainWindow::on_code_clear_clicked()
 {
     ui->code_edit->clear();
-    ui->statusbar->showMessage("code清屏", 1000);
+    ui->statusbar->showMessage("清空code", 2000);
 }
 
 /**
@@ -382,7 +390,7 @@ void MainWindow::on_code_clear_clicked()
 void MainWindow::on_comment_clear_clicked()
 {
     ui->comment_edit->clear();
-    ui->statusbar->showMessage("comment清屏", 1000);
+    ui->statusbar->showMessage("清空comment", 2000);
 }
 
 /**
