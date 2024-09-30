@@ -1,0 +1,11 @@
+release/code_highlighter.o
+release/main.o
+release/mainwindow.o
+release/new_data_dialog.o
+release/new_table.o
+release/query_execute.o
+release/moc_code_highlighter.o
+release/moc_mainwindow.o
+release/moc_new_data_dialog.o
+release/moc_new_table.o
+release/moc_query_execute.o

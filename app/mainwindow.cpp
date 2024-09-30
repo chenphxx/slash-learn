@@ -191,12 +191,14 @@ void MainWindow::on_search_button_clicked()
     if (number_index == 0)
     {
         // 使用参数化查询, 防止SQL注入风险
-        QString command = "SELECT * FROM " + table + " WHERE en_index = :index OR zh_index = :index";
         table = ui->language_switch->currentText();
+        QString command = "SELECT * FROM " + table + " WHERE en_index = :en_index OR zh_index = :zh_index";
         if (index == "000")  // 000表示查询所有数据
             command = "SELECT * FROM " + table;
 
         query.prepare(command);
+        query.bindValue(":en_index", index);
+        query.bindValue(":zh_index", index);
     }
     else
     {

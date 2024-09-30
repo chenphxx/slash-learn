@@ -1,0 +1,11 @@
+debug/code_highlighter.o
+debug/main.o
+debug/mainwindow.o
+debug/new_data_dialog.o
+debug/new_table.o
+debug/query_execute.o
+debug/moc_code_highlighter.o
+debug/moc_mainwindow.o
+debug/moc_new_data_dialog.o
+debug/moc_new_table.o
+debug/moc_query_execute.o
