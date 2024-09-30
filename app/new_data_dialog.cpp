@@ -14,8 +14,8 @@ new_data_dialog::new_data_dialog(const QString &tableValue, QWidget *parent)
     ui->setupUi(this);
 
     new code_highlighter(ui->new_data_code_edit->document());  // 应用代码高亮
-    ui->language_switch->setCurrentText(table_receive);  // 根据传递过来的值调整选项
     init_table();  // 更新列表选项
+    ui->language_switch->setCurrentText(table_receive);  // 根据传递过来的值调整选项
 }
 
 new_data_dialog::~new_data_dialog()
