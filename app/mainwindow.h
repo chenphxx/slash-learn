@@ -10,6 +10,8 @@
 #include <QMessageBox>  // 消息弹窗
 #include <QDialog>  // dialog
 #include <QFileDialog>
+#include <QDesktopServices>
+#include <QUrl>
 
 
 QT_BEGIN_NAMESPACE
