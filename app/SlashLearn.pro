@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     code_highlighter.cpp \
+    git.cpp \
     main.cpp \
     mainwindow.cpp \
     new_data_dialog.cpp \
@@ -18,12 +19,14 @@ SOURCES += \
 
 HEADERS += \
     code_highlighter.h \
+    git.h \
     mainwindow.h \
     new_data_dialog.h \
     new_table.h \
     query_execute.h
 
 FORMS += \
+    git.ui \
     mainwindow.ui \
     new_data_dialog.ui \
     new_table.ui \

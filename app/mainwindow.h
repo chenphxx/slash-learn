@@ -12,6 +12,7 @@
 #include <QFileDialog>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QProcess>
 
 
 QT_BEGIN_NAMESPACE
@@ -133,6 +134,14 @@ class MainWindow : public QMainWindow
          * @return 无
          */
         void on_search_query_button_clicked();
+
+        /**
+         * @brief git推送与更新
+         *
+         * @param NULL
+         * @return 无
+         */
+        void on_git_push_clicked();
 
     private:
         Ui::MainWindow *ui;

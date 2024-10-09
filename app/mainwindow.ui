@@ -17,9 +17,9 @@
    <widget class="QLineEdit" name="search_box">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>230</x>
       <y>80</y>
-      <width>471</width>
+      <width>361</width>
       <height>41</height>
      </rect>
     </property>
@@ -513,6 +513,38 @@ background-color: rgb(185, 187, 223);
      <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
     </property>
    </widget>
+   <widget class="QPushButton" name="git_push">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>80</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;
+background-color: rgb(185, 187, 223);
+</string>
+    </property>
+    <property name="text">
+     <string>数据库同步</string>
+    </property>
+    <property name="icon">
+     <iconset theme="QIcon::ThemeIcon::SyncSynchronizing"/>
+    </property>
+   </widget>
    <zorder>search_box</zorder>
    <zorder>language_switch</zorder>
    <zorder>language_label</zorder>
@@ -523,6 +555,7 @@ background-color: rgb(185, 187, 223);
    <zorder>search_button</zorder>
    <zorder>change_database_path</zorder>
    <zorder>search_query_button</zorder>
+   <zorder>git_push</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

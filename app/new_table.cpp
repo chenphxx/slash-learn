@@ -46,7 +46,7 @@ void new_table::on_new_table_confirm_clicked()
     if(!query.exec())
     {
         QString error = "新建表失败, 请重试:\n" + query.lastError().text();
-        QMessageBox::information(this, "title", error);
+        QMessageBox::information(this, "发生错误", error);
 
         return;
     }

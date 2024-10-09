@@ -37,7 +37,7 @@ void new_data_dialog::init_table()
     if (!query.exec(command))
     {
         QString error_msg = "表名获取失败: " + query.lastError().text();
-        QMessageBox::information(this, "title", error_msg);
+        QMessageBox::information(this, "发生错误", error_msg);
 
         return ;
     }
@@ -143,7 +143,7 @@ void new_data_dialog::on_new_data_save_clicked()
     }
     else
     {
-        QMessageBox::information(this, "title", "有数据未输入");
+        QMessageBox::information(this, "发生错误", "有数据未输入");
         return ;
     }
 
@@ -153,9 +153,9 @@ void new_data_dialog::on_new_data_save_clicked()
     query.bindValue(":code_snippet", code);
     query.bindValue(":zh_comment", comment);
     if (query.exec())
-        QMessageBox::information(this, "title", "保存/修改成功");
+        QMessageBox::information(this, "执行成功", "保存/修改成功");
     else
-        QMessageBox::information(this, "title", "保存/修改失败");
+        QMessageBox::information(this, "发生错误", "保存/修改失败");
 }
 
 /**
@@ -183,7 +183,7 @@ void new_data_dialog::on_new_data_delete_clicked()
             index_type = "en_index";
             if (index.isEmpty())
             {
-                QMessageBox::information(this, "title", "请输入要删除的数据信息");
+                QMessageBox::information(this, "发生错误", "请输入要删除的数据信息");
                 return ;
             }
         }
@@ -195,9 +195,9 @@ void new_data_dialog::on_new_data_delete_clicked()
         query.bindValue(":index", index);
 
     if(query.exec())
-        QMessageBox::information(this, "title", "删除成功");
+        QMessageBox::information(this, "执行成功", "删除成功");
     else
-        QMessageBox::information(this, "title", "删除失败, 请重试");
+        QMessageBox::information(this, "发生错误", "删除失败, 请重试");
 }
 
 /**

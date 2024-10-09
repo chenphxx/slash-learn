@@ -3,12 +3,14 @@
 #include "new_data_dialog.h"
 #include "query_execute.h"
 #include "new_table.h"
+#include "git.h"
 #include "code_highlighter.h"
 
 
 QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
 int number_index = 0;  // 索引编号
+QString database_path;  // 数据库地址
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 从 QSettings 中读取保存的数据库路径
     QSettings settings("code_database", "path");  // 注册表中的存储路径
-    QString database_path = settings.value("DatabasePath", default_path).toString();
+    database_path = settings.value("DatabasePath", default_path).toString();
 
     db.setDatabaseName(database_path);  // 数据库路径
     if (!db.open())
@@ -61,7 +63,7 @@ void MainWindow::init_table()
     if (!query.exec(command))
     {
         QString error_msg = "表名获取失败: " + query.lastError().text();
-        QMessageBox::information(this, "title", error_msg);
+        QMessageBox::information(this, "发生错误", error_msg);
 
         return ;
     }
@@ -305,7 +307,7 @@ void MainWindow::on_code_save_clicked()
 
     if (result_count == 0)
     {
-        QMessageBox::information(this, "title", "没有查询到结果, 保存失败");
+        QMessageBox::information(this, "发生错误", "没有查询到结果, 保存失败");
     }
     else if (result_count == 1)
     {
@@ -317,17 +319,17 @@ void MainWindow::on_code_save_clicked()
         query.exec();
         if (query.exec())
         {
-            QMessageBox::information(this, "title", "保存成功");
+            QMessageBox::information(this, "执行成功", "保存成功");
         }
         else
         {
             QString error_msg = "保存失败: " + query.lastError().text();
-            QMessageBox::information(this, "title", error_msg);
+            QMessageBox::information(this, "发生错误", error_msg);
         }
     }
     else
     {
-        QMessageBox::information(this, "title", "检测到有多条查询结果, 请选择要保存至哪一条结果");
+        QMessageBox::information(this, "发生错误", "检测到有多条查询结果, 请选择要保存至哪一条结果");
     }
 }
 
@@ -344,7 +346,7 @@ void MainWindow::on_comment_save_clicked()
 
     if (result_count == 0)
     {
-        QMessageBox::information(this, "title", "没有查询到结果, 保存失败");
+        QMessageBox::information(this, "发生错误", "没有查询到结果, 保存失败");
     }
     else if (result_count == 1)
     {
@@ -355,17 +357,17 @@ void MainWindow::on_comment_save_clicked()
         query.exec();
         if (query.exec())
         {
-            QMessageBox::information(this, "title", "保存成功");
+            QMessageBox::information(this, "执行成功", "保存成功");
         }
         else
         {
             QString error_msg = "保存失败: " + query.lastError().text();
-            QMessageBox::information(this, "title", error_msg);
+            QMessageBox::information(this, "发生错误", error_msg);
         }
     }
     else
     {
-        QMessageBox::information(this, "title", "检测到有多条查询结果, 请选择要保存至哪一条结果");
+        QMessageBox::information(this, "发生错误", "检测到有多条查询结果, 请选择要保存至哪一条结果");
     }
 }
 
@@ -416,6 +418,21 @@ void MainWindow::on_save_as_clicked()
 void MainWindow::on_search_query_button_clicked()
 {
     query_execute *dialog = new query_execute(this);
+    dialog->setModal(false);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->show();
+}
+
+
+/**
+ * @brief git推送与更新
+ *
+ * @param NULL
+ * @return 无
+ */
+void MainWindow::on_git_push_clicked()
+{
+    git *dialog = new git(database_path, this);
     dialog->setModal(false);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
