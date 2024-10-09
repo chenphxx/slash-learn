@@ -11,6 +11,7 @@ QString table = "C";  // 给定一个默认值
 unsigned int result_count = 0;  // 查询结果的数量
 int number_index = 0;  // 索引编号
 QString database_path;  // 数据库地址
+QSqlDatabase db;  // 数据库
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     new code_highlighter(ui->code_edit->document());  // 应用代码高亮
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
+    db = QSqlDatabase::addDatabase("QSQLITE");  // 创建数据库对象
 
     // 获取当前.exe路径并定位到sources文件夹
     QString exe_path = QCoreApplication::applicationDirPath();
@@ -432,8 +433,44 @@ void MainWindow::on_search_query_button_clicked()
  */
 void MainWindow::on_git_push_clicked()
 {
-    git *dialog = new git(database_path, this);
-    dialog->setModal(false);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->show();
+    // git *dialog = new git(database_path, this);
+    // dialog->setModal(false);
+    // dialog->setAttribute(Qt::WA_DeleteOnClose);
+    // dialog->show();
+
+    QProcess git_process;
+    QString git_directory = "C:/Users/chenphxx/Documents/Project/slash-learn";  // 指定打开git的地址
+
+    git_process.setWorkingDirectory(git_directory);  // 设置工作目录为指定的 Git 仓库
+    // git add
+    git_process.start("git", QStringList() << "add" << database_path);
+    if (!git_process.waitForFinished())
+    {
+        QString err_msg = "git add failed: " + git_process.errorString();
+        QMessageBox::information(this, "发生错误", err_msg);
+
+        return;
+    }
+
+    // git commit -m "database update"
+    git_process.start("git", QStringList() << "commit" << "-m" << "database update");
+    if (!git_process.waitForFinished())
+    {
+        QString err_msg = "git commit failed: " + git_process.errorString();
+        QMessageBox::information(this, "发生错误", err_msg);
+
+        return;
+    }
+
+    // git push origin main
+    git_process.start("git", QStringList() << "push" << "origin" << "main");
+    if (!git_process.waitForFinished())
+    {
+        QString err_msg = "git push failed: " + git_process.errorString();
+        QMessageBox::information(this, "发生错误", err_msg);
+
+        return;
+    }
+
+    QMessageBox::information(this, "执行成功", "推送更新成功");
 }

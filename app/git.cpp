@@ -74,8 +74,18 @@ void git::on_git_pull_clicked()
 
     git_process.setWorkingDirectory(git_directory);  // 设置工作目录为指定的 Git 仓库
 
-    // git fetch origin
-    git_process.start("git", QStringList() << "pull");
+    // 1. git fetch origin
+    git_process.start("git", QStringList() << "fetch" << "origin");
+    if (!git_process.waitForFinished())
+    {
+        QString err_msg = "git fetch failed: " + git_process.errorString();
+        QMessageBox::information(this, "发生错误", err_msg);
+
+        return;
+    }
+
+    // 2. git pull origin main
+    git_process.start("git", QStringList() << "pull" << "origin" << "main");
     if (!git_process.waitForFinished())
     {
         QString err_msg = "git pull failed: " + git_process.errorString();
@@ -84,5 +94,5 @@ void git::on_git_pull_clicked()
         return;
     }
 
-    QMessageBox::information(this, "执行成功", "更新数据库成功");
+    QMessageBox::information(this, "执行成功", "拉取更新成功");
 }

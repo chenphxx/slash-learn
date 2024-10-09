@@ -539,7 +539,7 @@ background-color: rgb(185, 187, 223);
 </string>
     </property>
     <property name="text">
-     <string>数据库同步</string>
+     <string>上传更新</string>
     </property>
     <property name="icon">
      <iconset theme="QIcon::ThemeIcon::SyncSynchronizing"/>
