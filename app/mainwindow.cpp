@@ -3,7 +3,6 @@
 #include "new_data_dialog.h"
 #include "query_execute.h"
 #include "new_table.h"
-#include "git.h"
 #include "code_highlighter.h"
 
 
