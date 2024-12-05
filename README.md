@@ -6,7 +6,7 @@
 
 点击`语句`选项, 支持直接输入sqlite语句进行操作 
 
-![](sources/运行示例.png) 
+![](assets/images/运行示例.png) 
 
 ## 联系作者
 
