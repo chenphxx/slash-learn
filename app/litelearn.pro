@@ -23,7 +23,8 @@ HEADERS += \
     mainwindow.h \
     new_data_dialog.h \
     new_table.h \
-    query_execute.h
+    query_execute.h \
+    resource.h
 
 FORMS += \
     git.ui \

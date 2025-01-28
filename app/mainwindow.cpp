@@ -438,7 +438,7 @@ void MainWindow::on_git_push_clicked()
     // dialog->show();
 
     QProcess git_process;
-    QString git_directory = "C:/Users/chenphxx/Documents/Project/slash-learn";  // 指定打开git的地址
+    QString git_directory = "C:/Users/chenphxx/Documents/Project/litelearn";  // 指定打开git的地址
 
     git_process.setWorkingDirectory(git_directory);  // 设置工作目录为指定的 Git 仓库
     // git add
