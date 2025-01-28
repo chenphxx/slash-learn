@@ -1,4 +1,4 @@
 # 忽略build文件夹
 /app/build/
 # 忽略配置user文件
-/app/SlashLearn.pro.user
+/app/litelearn.pro.user
